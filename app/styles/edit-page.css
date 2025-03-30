@@ -1,0 +1,142 @@
+.edit-header {
+    display: flex;
+    justify-content: end;
+}
+
+.edit-product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  padding-top: 0px; 
+  padding-bottom: 100px; 
+}
+
+.edit-btn-cancel {
+  text-decoration: none;
+  color: #222;
+  text-align: center;
+  line-height: 36px;
+}
+
+.edit-btn-cancel,
+.edit-btn-save {
+    width: 90px;
+    height: 30px;
+    margin-bottom: 10px;
+    background: #BDC2C8;
+    border: 1px solid #555;
+    font-family: sans-serif;
+    color: #666;
+    border-radius: 2px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+    height: 36px;
+    margin-left: 5px;
+}
+    
+.edit-btn-cancel:hover, 
+.edit-btn-save:hover {
+    cursor: pointer;
+    opacity: .82;
+}
+
+input[type="number"].edit-form-price {
+    width:80px;
+ }
+
+ .edit-form-price {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #282828;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    line-height: 2;
+ }
+
+ .edit-form-name {
+    font-family:  "prestige-elite-std", serif;
+    font-size: 16px;
+    color: #282828;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    line-height: 2;
+  }
+  
+  .edit-form-description {
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+    font-family:  "prestige-elite-std", serif;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .edit-form-label {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #111;
+    display:inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .edit-form-categories {
+    height: 140px;
+    padding: 10px;
+    overflow-y: scroll;
+    border: 1px solid #111;
+    background-color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .edit-form-category {
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  .edit-form-category-label {
+    margin-left: 10px;
+  }
+
+  .edit-form-new-category-flex {
+    display: flex;
+    width: 100%;
+  }
+                                   
+  .edit-form-new-category {
+    width: 100%;
+    font-size: 16px;
+    line-height: 32px;
+    padding-left: 5px;
+    font-family: sans-serif;
+    margin-right: 5px;
+    color: #555;
+  }
+
+  .edit-form-new-category-btn {
+    width: 100px;
+    font-family: sans-serif;
+    background: #BDC2C8;
+    border: 1px solid #555;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #666;
+    border-radius: 2px;
+    font-size: 14px;
+
+  }
+
+  .edit-btn-wrap {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: right;
+  }

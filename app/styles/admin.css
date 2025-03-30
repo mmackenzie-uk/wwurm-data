@@ -1,0 +1,120 @@
+
+.admin-list {
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    width: 1200px;
+    margin-bottom: 50px;
+}
+
+.admin-list-item {
+    padding-inline: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    
+    grid-template-columns: 50px 100px 1fr 1fr 100px 100px 80px 80px;
+    row-gap: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-list li:first-child {
+    font-weight: bold;
+    /* background-color: #f9f9f9; */
+}
+
+.admin-list li:last-child {
+    border-bottom: 0;
+}
+
+.admin-list li:hover {
+    /* opacity: 0.6;
+    cursor: pointer; */
+}
+
+.admin-list-img {
+    max-width: 70px;
+}
+
+.admin-list-btn {
+    height: 30px;
+    margin-left: 5px;
+    /* background-color: #BDC2C8; */
+    border: 1px solid #555; 
+    border-radius: 2px;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+.admin-list-btn:hover {
+    cursor: pointer;
+    opacity: .82;
+}
+
+.create-wrap {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;;
+}
+
+.create-btn {
+    width: 90px;
+    height: 30px;
+    margin-bottom: 20px;
+    background: #BDC2C8;
+    border: 1px solid #555;
+    font-family: sans-serif;
+    color: #666;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.create-btn:hover {
+    cursor: pointer;
+    opacity: .82;
+}
+
+.admin-list-title {
+    font-size: 24px;
+}
+
+.admin-list-nav {
+    display: flex;
+}
+
+.create {
+    text-align: center;
+    line-height: 28px;
+    width: 80px;
+    margin-left: 0px;
+    text-decoration: none;
+    color: #222;
+}
+
+.edit {
+    text-align: center;
+    line-height: 28px;
+    text-decoration: none;
+    color: #222;
+    background-color: #fff;
+}
+
+.delete {
+    color: #222;
+    background-color: #fff;
+}
+
+.admin-list-img-wrap {
+    width: 70px;
+    aspect-ratio: 350 / 435;
+    border: 1px solid #999;
+    overflow: hidden;
+}
+
+.admin-list-img {
+    height: 100%;
+    width: 100%;
+}

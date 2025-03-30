@@ -1,0 +1,86 @@
+/******* Thumbnails **********/
+
+.edit-image-widget-small-list li {
+    width: 60px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+  
+.edit-image-widget-small-list li:hover {
+    border: 2px solid #444;
+    cursor: pointer;
+}
+  
+.thumbnail-selected {
+    border: 2px solid #444;
+}
+  
+.edit-image-widget-small-image {
+    max-width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.edit-image-widget-small-image-wrap {
+    position: relative;
+}
+  
+/******   Main Images  *******/
+  
+.edit-image-widget {
+    display: grid;
+    grid-template-columns: 100px auto;
+}
+  
+.edit-image-widget-large-image-wrap {
+    position: relative;
+}
+  
+.edit-image-widget-large-image {
+    aspect-ratio: 13 / 17;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: none;
+    border: 1px solid #aaa;
+}
+  
+.selected {
+    display: block;
+}
+  
+
+.edit-image-widget-large-list {
+    position: relative;
+}
+
+.edit-image-remove,
+.edit-image-add {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 5px;
+    border-radius: 3px;
+    border: 0;
+    background-color: #444;
+    color: #fff;
+}
+
+
+.edit-image-add:hover,
+.edit-image-remove:hover {
+    cursor: pointer;
+    opacity: .82;
+}
+
+
+.edit-image-btn-wrap {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1000;
+}

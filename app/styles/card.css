@@ -1,0 +1,30 @@
+.card-img-wrap {
+    display: block;
+    text-decoration: none;
+}
+
+.card-img {
+    width: 100%;
+    height: auto; 
+    object-fit: cover;
+}
+
+.card-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    margin-bottom: 20px;
+}
+
+.card-detail-list {
+    list-style-type: none;
+}
+
+.card-link {
+    display: inline-block;
+    font-family:  "prestige-elite-std", serif;
+    font-weight: 700;
+    text-decoration: none;
+    color: #424242;
+}
+  
