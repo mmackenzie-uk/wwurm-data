@@ -1,4 +1,4 @@
-import { findAll, getCount } from "@/app/actions"
+import { findAll, getCount } from "@/app/actions/database"
 import { SHOP } from "@/app/configuration/wwurm";
 import { IProduct } from "@/app/ts/type-definitions";
 import Pagination from "@/app/ui-client/pagination";

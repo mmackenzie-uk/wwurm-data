@@ -1,5 +1,5 @@
 
-import { getCategories, getProductPageData } from "@/app/actions";
+import { getCategories, getProductPageData } from "@/app/actions/database";
 import Link from "next/link";
 
 export default async function Product({ params, }: {params: Promise<{ slug: string }>}) {

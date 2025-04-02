@@ -1,5 +1,5 @@
 import Carousel from "./ui-client/carousel";
-import { findAll } from "./actions";
+import { findAll } from "./actions/database";
 import { openDb } from "./data/db";
 import ProductsList from "./ui-client/products-list";
 
