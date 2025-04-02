@@ -1,6 +1,6 @@
 
 import { getCategories } from "@/app/actions";
-import EditImageWidget from "@/app/ui-client/edit-image-widget";
+import BucketImageWidget from "@/app/ui-client/bucket-image-widget";
 import Link from "next/link";
 
 export default async function ProduPagect() {
@@ -18,8 +18,15 @@ export default async function ProduPagect() {
                 </section>
                 <section className="section">
                     <div className="edit-product-grid">
-                        <EditImageWidget thumbnails={['place-holder-small-image.jpg']} images={['place-holder-large-image.jpg']} />
-                        <div className="product-details">
+                        <div>
+                        <div className="edit-product-image-header">
+                            <h2 className="edit-product-image-header-title">Product Images:</h2>
+                            <div></div>
+                        </div>
+                        <BucketImageWidget />
+                        </div>
+                       
+                        <div className="edit-product-details">
                             <label htmlFor="fname" className="edit-form-label">Product Name:</label>
                             <input 
                                 type="text" 
@@ -49,19 +56,19 @@ export default async function ProduPagect() {
                             />
                             <label htmlFor="price" className="edit-form-label">Category:</label>
                             <ul className="edit-form-categories" role="list">
-                            {
-                                categories.map(({ name, id, slug }, index) => 
-                                    <li key={id} className="edit-form-category">
-                                        <input 
-                                            type="radio" 
-                                            id={slug} 
-                                            name={slug} 
-                                            value={slug} 
-                                            defaultChecked={index === 0}
-                                        />
-                                        <label className="edit-form-category-label" htmlFor={slug}>{name}</label><br />
-                                    </li>)
-                            }
+                                {
+                                    categories.map(({ name, id, slug }, index) => 
+                                        <li key={id} className="edit-form-category">
+                                            <input 
+                                                type="radio" 
+                                                id={slug} 
+                                                name="category" 
+                                                value={slug} 
+                                                defaultChecked={index === 0}
+                                            />
+                                            <label className="edit-form-category-label" htmlFor={slug}>{name}</label><br />
+                                        </li>)
+                                }
                             </ul>   
                             <div className="edit-form-new-category-flex">
                                 <input 

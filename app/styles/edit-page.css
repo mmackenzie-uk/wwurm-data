@@ -1,3 +1,22 @@
+.edit-product-details {
+  margin-left: 25px;;
+}
+
+.edit-product-image-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-product-image-header-title {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #111;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+
 .edit-header {
     display: flex;
     justify-content: end;
@@ -5,7 +24,7 @@
 
 .edit-product-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: .6fr .4fr;
   grid-gap: 20px;
   padding-top: 0px; 
   padding-bottom: 100px; 

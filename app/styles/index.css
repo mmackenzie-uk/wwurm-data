@@ -1,6 +1,7 @@
 @import url(about.css);
 @import url(admin.css);
 @import url(btns.css);
+@import url(bucket-image-widget.css);
 @import url(card.css);
 @import url(carousel.css);
 @import url(cart-aside.css);
@@ -10,7 +11,6 @@
 @import url(dropdown.css);
 @import url(dropdown-btn.css);
 @import url(edit-page.css);
-@import url(edit-image-widget.css);
 @import url(footer.css);
 @import url(globals.css);
 @import url(header.css);

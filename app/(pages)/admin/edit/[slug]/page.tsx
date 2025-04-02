@@ -1,6 +1,5 @@
 
 import { getCategories, getProductPageData } from "@/app/actions";
-import EditImageWidget from "@/app/ui-client/edit-image-widget";
 import Link from "next/link";
 
 export default async function Product({ params, }: {params: Promise<{ slug: string }>}) {
@@ -21,7 +20,7 @@ export default async function Product({ params, }: {params: Promise<{ slug: stri
                 </section>
                 <section className="section">
                     <div className="edit-product-grid">
-                        <EditImageWidget thumbnails={product.smallImage} images={product.largeImage} />
+                        <div>placeholder</div>
                         <div className="product-details">
                             <label htmlFor="fname" className="edit-form-label">Product Name:</label>
                             <input 
