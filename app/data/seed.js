@@ -52,6 +52,7 @@ async function setup() {
     slug, 
     category
   }) => {
+    // For ease of entering data, catgeory is entered by slug. Convert slug to Id
     const catIndex = categories.findIndex(({ slug }) => (slug === category)) + 1;
     const pr = db.run(
       `INSERT INTO products ( name, 

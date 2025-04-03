@@ -121,22 +121,55 @@ export async function getProductPageData(slug : string) {
 }
 
 export async function getCount(ITEMS_PER_PAGE: number) {
-
-     const db = await openDb();
-     const res = await db.all(`SELECT COUNT(*) FROM products`);
-
-    // console.log("res ", res[0]['COUNT(*)'])
-  
+    const db = await openDb();
+    const res = await db.all(`SELECT COUNT(*) FROM products`);
     const totalPages = Math.ceil(Number( res[0]['COUNT(*)']) / ITEMS_PER_PAGE);
     return totalPages;
-  }
+}
 
- export async function callback(pageNumber: number) {
+ export async function handleProduct(id: number, formData: FormData) {
+    if (formData.get("edit")) {
+        editProduct(id, formData);
+    } else {
+        createProduct(formData);
+    } 
+ }
 
-    console.log("callback ", "cc")
+ async function editProduct(id: number, formData: FormData) {
+    console.log("edit called");
+    console.log("formData", formData);
+
+    const price = Number(formData.get("price")) * 100;
+    const name = formData.get("name");
+    const description = formData.get("description");
+    const categoryId = Number(formData.get("categoryId"));
+    const image = formData.getAll("image");
+
+    const smallImage = JSON.stringify(image);
+    const mediumImage = JSON.stringify(image);
+    const largeImage = JSON.stringify(image);
+
     const db = await openDb();
-     const res = await db.all(`SELECT COUNT(*) FROM products`);
+    const sql =` UPDATE products
+        SET price = ${price},
+        name="${name}",
+        description="${description}",
+        smallImage="${smallImage}",
+        mediumImage="${mediumImage}",
+        largeImage="${largeImage}",
+        categoryId=${categoryId}
+        WHERE id = ${id}`;
+        
+    const res = await db.all(sql);
+ }
+
+ async function createProduct(formData: FormData) {
+    console.log("create called");
+    console.log("formData", formData)
  }
 
 
- 
+ //image: [ 'Brucknersekt-680x850.jpg', 'anton-bruckner-overlay-680x850.jpg' ],
+  
+//  description = ${description},
+//  category = ${category}

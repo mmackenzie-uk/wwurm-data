@@ -1,40 +1,34 @@
 "use server"
 
 import AWS from 'aws-sdk';
-import { ObjectList } from 'aws-sdk/clients/s3';
+import { S3_ALBUM_NAME } from '../configuration/wwurm';
+
+import {
+    S3Client,
+    ListObjectsV2Command,
+} from "@aws-sdk/client-s3";
 
 // Initialize the Amazon Cognito credentials provider
 AWS.config.region = "eu-west-2"; // Region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-  IdentityPoolId: process.env.NEXT_PUBLIC_IDENTITY_POOL!,
+  IdentityPoolId: process.env.AWS_IDENTITY_POOL!,
 });
-const Bucket = process.env.NEXT_PUBLIC_BUCKET_NAME!;
+const BucketName = process.env.AWS_BUCKET_NAME!;
+const client = new S3Client({});
 
-// Create a new service object
-const s3 = new AWS.S3({
-  apiVersion: "2006-03-01",
-  params: { Bucket },
-});
+export default async function getPhotos() {
+    const input = {
+        Bucket: BucketName,
+        Prefix: S3_ALBUM_NAME
+    };
+    const command = new ListObjectsV2Command(input);
+    const response = await client.send(command);
+    const href = `https://${BucketName}.s3.eu-west-2.amazonaws.com/`
 
-export default async function getPhotos(): Promise<{ photos: ObjectList | undefined, bucketUrl: string }> {
-    const albumName = "all-produkte";
-    const prefix = encodeURIComponent(albumName) + "/";
-
-    return new Promise((resolve, reject) => 
-        s3.listObjects({ Prefix: prefix, Bucket }, function(err, data){
-            if (err) {
-                reject(err);
-            }
-            // @ts-ignore
-            const href = this.request.httpRequest.endpoint.href;
-            resolve(
-                {
-                    photos: data.Contents?.slice(1),
-                    bucketUrl: href + Bucket + "/"
-                }
-            );
-        }));
+    return {
+        photos: response.Contents?.slice(1),
+        bucketUrl: href  
+    };
 }
-
 
   

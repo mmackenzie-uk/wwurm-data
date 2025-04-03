@@ -154,57 +154,73 @@ input[type="number"].edit-form-price {
     color: #555;
   }
 
-  .edit-form-new-category-btn {
-    width: 100px;
-    font-family: sans-serif;
-    background: #BDC2C8;
-    border: 1px solid #555;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: #666;
-    border-radius: 2px;
-    font-size: 14px;
+.edit-form-new-category-btn {
+  width: 100px;
+  font-family: sans-serif;
+  background: #BDC2C8;
+  border: 1px solid #555;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #666;
+  border-radius: 2px;
+  font-size: 14px;
 
-  }
+}
 
-  .edit-btn-wrap {
-    margin-top: 0px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: right;
-  }
+.edit-btn-wrap {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: right;
+}
 
-  .bucket-image-widget-img-wrap {
-    position: relative;
-  }
+.bucket-image-widget-img-wrap {
+  position: relative;
+}
 
-  input[type="checkbox"] {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    line-height: normal;
-    width: 15px;
-    height: 15px;
-    /* accent-color: red; */
-  }
+input[type="checkbox"] {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  line-height: normal;
+  width: 17px;
+  height: 17px;
+  /* accent-color: red; */
+}
 
-  .bucket-image-widget-container {
-    height: 700px;
-    overflow-y: scroll;
-    background-color: #fff;
-    border: 1px solid #444;
-    padding: 5px;
+.bucket-image-widget-container {
+  height: 700px;
+  overflow-y: scroll;
+  background-color: #fff;
+  border: 1px solid #444;
+  padding: 5px;
 }
 
 .bucket-image-widget-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 5px;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 5px;
 }
 
 .bucket-image-widget-img {
-    width: 100%;
-    aspect-ratio: 680 / 850;
+  width: 100%;
+  aspect-ratio: 680 / 850;
+}
 
+.bucket-image-widget-name {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  font-size: 12px;
+  background-color: #fff;
+  max-width: 125px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-inline: 3px;
+  border-radius: 1px;
+  color: #555;
+  /* border: 1px solid #444; */
 }

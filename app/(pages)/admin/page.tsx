@@ -1,6 +1,5 @@
 import { findAll, getCount } from "@/app/actions/database"
 import { SHOP } from "@/app/configuration/wwurm";
-import { IProduct } from "@/app/ts/type-definitions";
 import Pagination from "@/app/ui-client/pagination";
 import Link from "next/link";
 
@@ -21,7 +20,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                 <div className="admin-list-nav">
                     <Pagination count={count} />
                     <Link
-                        href={`/admin/create`}
+                        href={`/admin/edit/`}
                         className="admin-list-btn create"
                     >
                         + New
@@ -47,7 +46,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                         img = smallImage[0] || ""
                     }
 
-                    const background = (index % 2 === 0) ?  "#D6EEEE" : "#fff" ;
+                    const background = "#fff"; 
                     return (
                         <li key={id} className="admin-list-item" style={{background: background}}>
                             <span>{id}</span>
