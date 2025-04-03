@@ -3,9 +3,9 @@ export type IProduct = {
     name: string;
     price: number;
     description?: string;
-    smallImage?: Array<string>;
-    mediumImage?: Array<string>;
-    largeImage?: Array<string>;
+    smallImage?: string;
+    mediumImage?: string;
+    largeImage?: string;
     availability?: number;    
     slug: string;
     categoryId: number;

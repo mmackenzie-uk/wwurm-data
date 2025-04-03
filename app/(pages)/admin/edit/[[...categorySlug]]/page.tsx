@@ -7,39 +7,35 @@ import Link from "next/link";
 export default async function Product({ params, }: {params: Promise<{ categorySlug: string }>}) {
     const { categorySlug } = await params;
     let product;
-    let checked = false;
+    let edit = false;
     if (categorySlug) {
-        checked = true;
+        edit = true;
         const response = await getProductPageData(categorySlug);
         product = response.product;
     }
     const categories = await getCategories();
-    const { photos, bucketUrl} = await getPhotos();
+    const { photos, href} = await getPhotos();
 
-    const name = checked ? product!.name : "Product Name";
-    const description = checked ? product!.description : "description";
-    const price = checked ? product!.price : 1;
-    const categoryId = checked ? product!.categoryId : -1;
-    const images = checked ? product?.largeImage : [];
-
-    console.log("prod ", product)
+    const name = edit ? product!.name : "Product Name";
+    const description = edit ? product!.description : "description";
+    const price = edit ? product!.price : 1;
+    const categoryId = edit ? product!.categoryId : -1;
+    const images = edit ? product?.largeImage : "";
 
     const albumName = S3_ALBUM_NAME;
     const albumPhotosKey = encodeURIComponent(albumName) + "/";
 
-    const handleProductWithId = handleProduct.bind(null, product!.id);
-
     return (
-        <form className="product" action={handleProductWithId}>       
+        <form className="product" action={handleProduct}>          
             <input 
-                type="checkbox" 
-                name={"edit"} 
-                defaultChecked={checked} 
+                type="text" 
+                name="id" 
+                defaultValue={product?.id || ""} 
                 hidden
-            />     
+            />
             <section className="section">
                 <div className="edit-product-header">
-                    <h2 className="edit-product-title">{checked ? "Edit" : "Create"} Product</h2>
+                    <h2 className="edit-product-title">{edit ? "Edit" : "Create"} Product</h2>
                     <div className="edit-btn-wrap">
                         <Link href="/admin" className="edit-btn-cancel">Cancel</Link>
                         <button className="edit-btn-save" type="submit">Save</button>
@@ -59,19 +55,21 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
                             {
                                 photos && photos.map((photo) => {   
                                     const photoKey = photo.Key;
-                                    const photoUrl = bucketUrl + encodeURIComponent(photoKey!);  
-                                    const name = photoKey!.replace(albumPhotosKey, "");                      
+                                    const photoUrl = href + encodeURIComponent(photoKey!);  
+                                    const name = photoKey!.replace(albumPhotosKey, "");   
+                                    let title = name.replaceAll("-", " ");                
+                                    title = title.replaceAll(".jpg", "");                
                                     return (
                                         <li key={photoKey} className="bucket-image-widget-li">
                                             <div className="bucket-image-widget-img-wrap">
-                                                <span className="bucket-image-widget-name">{name}</span>
+                                                <span className="bucket-image-widget-name">{title}</span>
                                                 <label>
                                                     <input 
                                                         type="checkbox" 
                                                         id={photoKey} 
                                                         value={name} 
                                                         name={"image"} 
-                                                        defaultChecked={images.includes(name)}
+                                                        defaultChecked={images!.includes(name)}
                                                     />
                                                     <img 
                                                         src={photoUrl} 

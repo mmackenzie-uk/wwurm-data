@@ -3,6 +3,8 @@ import BtnBuy from "../ui-client/btn-buy";
 import { BtnLike } from "./btns";
 import { IProduct } from "../ts/type-definitions";
 
+import { S3_ALBUM_NAME, AWS_BUCKET_NAME } from "@/app/configuration/wwurm";
+
 type ICard = {
     product: IProduct;
     index?: string | number | undefined;
@@ -10,11 +12,16 @@ type ICard = {
 
 export default function Card({ product, index }: ICard ) {
     const { name, mediumImage, slug } = product;
-    const _card = mediumImage && mediumImage[0];
+    const arr = mediumImage!.split(',');
+    const image = arr && arr[0];
+
+    const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
+    const src = href + S3_ALBUM_NAME + "/" + encodeURIComponent(image!);  
+
     return (
         <div key={index} className="card">                   
             <Link href={`/product/${slug}`} className="card-img-wrap">
-                <img className="card-img" src={`/products-nm/${_card}`} />
+                <img className="card-img" src={src} />
             </Link>            
             <div className="card-caption">
                 <ul className="card-detail-list">

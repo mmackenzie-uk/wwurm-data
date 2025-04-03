@@ -23,9 +23,9 @@ const toProduct = (res: IResponse) => {
         name: res.name,
         price: res.price / 100,
         description: res.description,
-        smallImage: JSON.parse(res.smallImage),
-        mediumImage: JSON.parse(res.mediumImage),
-        largeImage: JSON.parse(res.largeImage),
+        smallImage: res.smallImage.replaceAll("\"", ""), 
+        mediumImage: res.mediumImage.replaceAll("\"", ""),
+        largeImage: res.largeImage.replaceAll("\"", ""),
         availability: res.availability, 
         slug: res.slug,
         categoryId: res.categoryId
@@ -127,39 +127,36 @@ export async function getCount(ITEMS_PER_PAGE: number) {
     return totalPages;
 }
 
- export async function handleProduct(id: number, formData: FormData) {
-    if (formData.get("edit")) {
-        editProduct(id, formData);
+ export async function handleProduct(formData: FormData) {
+    if (formData.get("id")) {
+        editProduct(formData);
     } else {
         createProduct(formData);
     } 
  }
 
- async function editProduct(id: number, formData: FormData) {
+ async function editProduct(formData: FormData) {
     console.log("edit called");
     console.log("formData", formData);
 
     const price = Number(formData.get("price")) * 100;
     const name = formData.get("name");
+    const id = Number(formData.get("id"));
     const description = formData.get("description");
     const categoryId = Number(formData.get("categoryId"));
-    const image = formData.getAll("image");
-
-    const smallImage = JSON.stringify(image);
-    const mediumImage = JSON.stringify(image);
-    const largeImage = JSON.stringify(image);
+    const image = formData.getAll("image").toString();
 
     const db = await openDb();
     const sql =` UPDATE products
         SET price = ${price},
         name="${name}",
         description="${description}",
-        smallImage="${smallImage}",
-        mediumImage="${mediumImage}",
-        largeImage="${largeImage}",
+        smallImage="${image}",
+        mediumImage="${image}",
+        largeImage="${image}",
         categoryId=${categoryId}
         WHERE id = ${id}`;
-        
+
     const res = await db.all(sql);
  }
 
@@ -167,9 +164,3 @@ export async function getCount(ITEMS_PER_PAGE: number) {
     console.log("create called");
     console.log("formData", formData)
  }
-
-
- //image: [ 'Brucknersekt-680x850.jpg', 'anton-bruckner-overlay-680x850.jpg' ],
-  
-//  description = ${description},
-//  category = ${category}

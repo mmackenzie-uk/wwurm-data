@@ -16,7 +16,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
     return (
         <div className="admin">
             <div className="create-wrap">
-                <h2 className="admin-list-title">Products ({count })</h2>
+                <h2 className="admin-list-title">Products List</h2>
                 <div className="admin-list-nav">
                     <Pagination count={count} />
                     <Link
@@ -41,14 +41,10 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                 </li>
             {
                 products.map(({ name, id, price, availability, slug, smallImage }, index) => {
-                    let img = "";
-                    if (smallImage) {
-                        img = smallImage[0] || ""
-                    }
-
-                    const background = "#fff"; 
+                    const arr = smallImage!.split(',');
+                    const img = arr && arr[0];       
                     return (
-                        <li key={id} className="admin-list-item" style={{background: background}}>
+                        <li key={id} className="admin-list-item">
                             <span>{id}</span>
                             <div className="admin-list-img-wrap">
                                 <img src={`/${SHOP}/${img}`} className="admin-list-img"/>
