@@ -7,7 +7,6 @@ export default async function Home() {
 
   const db = await openDb();
   const c = await db.all('SELECT * FROM categories');
-  console.log("c ", c)
   const p = await db.all('SELECT * FROM products');
 
   const products = await findAll(1, 10);  

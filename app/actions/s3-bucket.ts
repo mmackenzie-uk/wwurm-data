@@ -16,18 +16,15 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 const client = new S3Client({});
 
 export default async function getPhotos() {
-    const input = {
+
+    const command = new ListObjectsV2Command({
         Bucket: AWS_BUCKET_NAME,
         Prefix: S3_ALBUM_NAME
-    };
-    const command = new ListObjectsV2Command(input);
-    const response = await client.send(command);
-    const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`
+    });
 
-    return {
-        photos: response.Contents?.slice(1),
-        href  
-    };
+    const response = await client.send(command);
+
+    return response.Contents?.slice(1);
 }
 
 

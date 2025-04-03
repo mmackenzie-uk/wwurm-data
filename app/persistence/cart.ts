@@ -77,7 +77,7 @@ class Store implements IStore {
                 qty: qty,
                 price: truncatedProduct.price,
                 slug: truncatedProduct.slug,
-                image: truncatedProduct.image
+                smallImage: truncatedProduct.smallImage
             });
         } 
         this.sync();

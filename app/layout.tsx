@@ -17,7 +17,6 @@ export default function RootLayout({
     <html lang="en" style={{scrollBehavior: "smooth"}}>
       <body>
         <Header />
-        {/* <State /> */}
         {children}
         <Footer />
       </body>

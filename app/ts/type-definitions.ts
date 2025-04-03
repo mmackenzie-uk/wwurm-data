@@ -14,7 +14,7 @@ export type IProduct = {
 export type ITruncatedProduct = {
     id: number,
     name: string,
-    image: string,
+    smallImage?: string,
     price: number,
     slug: string
 }
@@ -22,7 +22,7 @@ export type ITruncatedProduct = {
 export type ICartItem = {
     id: number,
     name: string,
-    image: string,
+    smallImage?: string,
     price: number,
     slug: string
     qty: number;

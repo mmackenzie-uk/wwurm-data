@@ -2,12 +2,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { SHOP } from "../configuration/wwurm";
+import { AWS_BUCKET_NAME, S3_ALBUM_NAME, SHOP } from "../configuration/wwurm";
 import { store } from "@/app/persistence/cart";
 import { ICart } from "../ts/type-definitions";
 import InputNumber from "./input-number";
 import { closeCart } from "../ts/utility";
 
+const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
+const prefix = href + S3_ALBUM_NAME + "/";
 
 export default function CartAside() {
     const [cart, setCart] = useState<ICart>([]);
@@ -23,7 +25,6 @@ export default function CartAside() {
     cart.forEach(({ price, qty }) => {
         total = price * qty + total;
     });
-
     return (
             <div id="cart-aside" className="cart-aside-wrap">
                 <div className="cart-aside-header">
@@ -42,36 +43,38 @@ export default function CartAside() {
                 :
                     <ul className="cart-aside-items" role="list">
                     {
-                        cart.map(({id, name, price, image, slug, qty}) => 
-                        <li key={id} className="cart-aside-item">
-                            <div className="row">
-                                <div className="col-1">
-                                    <div className="col-img-wrap" >
-                                        <img src={`/${SHOP}/${image}`} className="col-img" width="60"/>
+                        cart.map(({id, name, price, smallImage, slug, qty}) => {                      
+                            const src = prefix + encodeURIComponent(smallImage!.split(',')[0]); 
+                            return ( 
+                                <li key={id} className="cart-aside-item">
+                                    <div className="row">
+                                        <div className="col-1">
+                                            <div className="col-img-wrap" >
+                                                <img src={src} className="col-img" width="60"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-2">
+                                            <Link href={slug} className="col-heading overflow">{name}
+                                            </Link>
+                                            <div className="col-qty"><span>Anz. </span>  
+                                                <InputNumber 
+                                                    increment={() => store.increase(id)}              
+                                                    decrement={() => store.reduce(id)}              
+                                                    color="#eee"
+                                                    value={qty}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-3">
+                                            <h4>&nbsp;</h4>
+                                            <p>$ {(price * qty).toFixed(2)}</p>
+                                            <button onClick={() => store.remove(id)} className="remove-cart-btn">
+                                                <i className="cm-font nm-font-close2"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="col-2">
-                                    <Link href={slug} className="col-heading overflow">{name}
-                                    </Link>
-                                    <div className="col-qty"><span>Anz. </span>  
-                                        <InputNumber 
-                                            increment={() => store.increase(id)}              
-                                            decrement={() => store.reduce(id)}              
-                                            color="#eee"
-                                            value={qty}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-3">
-                                    <h4>&nbsp;</h4>
-                                    <p>$ {(price * qty).toFixed(2)}</p>
-                                    <button onClick={() => store.remove(id)} className="remove-cart-btn">
-                                        <i className="cm-font nm-font-close2"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                        )
+                                </li>)
+                            })
                     }
                     </ul>
                 }

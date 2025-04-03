@@ -20,9 +20,11 @@ export const truncate = (product: IProduct) => {
     const truncatedProduct : ITruncatedProduct = {
         id: product.id,
         name: product.name,
-        image: product.thumbnails? product.thumbnails[0] : "",
+        smallImage: product.smallImage,
         price: product.price,
         slug: product.slug
     }
+
+    console.log("truncatedProduct ", truncatedProduct)
     return truncatedProduct;
 }

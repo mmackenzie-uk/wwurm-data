@@ -61,6 +61,7 @@ export async function findByCategory(slug: string) {
     // Open database
     const db = await openDb();
     const category = await getCategory(slug);
+    
     const categoryId = category.id;
     const res = await db.all(`SELECT * FROM products WHERE categoryId = ${categoryId}`);
     const products: Array<IProduct> = [];
@@ -82,6 +83,8 @@ export async function getCategory(slug: string) {
     // Open database
     const db = await openDb();
     const res = await db.all(`SELECT * FROM categories WHERE slug = "${slug}"`);
+
+    console.log("res slug ", res, slug)
     return res[0];
 }
 
@@ -158,6 +161,8 @@ export async function getCount(ITEMS_PER_PAGE: number) {
         WHERE id = ${id}`;
 
     const res = await db.all(sql);
+    
+    return res;
  }
 
  async function createProduct(formData: FormData) {
