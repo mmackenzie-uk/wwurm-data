@@ -1,5 +1,5 @@
 import { findAll, getCount } from "@/app/actions/database"
-import { SHOP } from "@/app/configuration/wwurm";
+import { AWS_BUCKET_NAME, S3_ALBUM_NAME, SHOP } from "@/app/configuration/wwurm";
 import Pagination from "@/app/ui-client/pagination";
 import Link from "next/link";
 
@@ -42,12 +42,15 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
             {
                 products.map(({ name, id, price, availability, slug, smallImage }, index) => {
                     const arr = smallImage!.split(',');
-                    const img = arr && arr[0];       
+                    const image = arr && arr[0];     
+                    const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
+                    const src = href + S3_ALBUM_NAME + "/" + encodeURIComponent(image!); 
+
                     return (
                         <li key={id} className="admin-list-item">
                             <span>{id}</span>
                             <div className="admin-list-img-wrap">
-                                <img src={`/${SHOP}/${img}`} className="admin-list-img"/>
+                                <img src={src} className="admin-list-img"/>
                             </div>
                             <span>{name}</span>
                             <span>{slug}</span>
