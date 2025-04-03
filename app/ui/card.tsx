@@ -5,6 +5,9 @@ import { IProduct } from "../ts/type-definitions";
 
 import { S3_ALBUM_NAME, AWS_BUCKET_NAME } from "@/app/configuration/wwurm";
 
+const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
+const prefix = href + S3_ALBUM_NAME + "/";
+
 type ICard = {
     product: IProduct;
     index?: string | number | undefined;
@@ -12,12 +15,7 @@ type ICard = {
 
 export default function Card({ product, index }: ICard ) {
     const { name, mediumImage, slug } = product;
-    const arr = mediumImage!.split(',');
-    const image = arr && arr[0];
-
-    const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
-    const src = href + S3_ALBUM_NAME + "/" + encodeURIComponent(image!);  
-
+    const src = prefix + encodeURIComponent(mediumImage!.split(',')[0]); 
     return (
         <div key={index} className="card">                   
             <Link href={`/product/${slug}`} className="card-img-wrap">
