@@ -1,5 +1,6 @@
 import { CART_CLOSED_POSITION, CART_OPENED_POSITION } from "../configuration/wwurm";
 import { IProduct, ITruncatedProduct } from "./type-definitions";
+import { AWS_BUCKET_NAME, S3_ALBUM_NAME } from "../configuration/wwurm";
 
 export const openCart = () => {
     const sideNav = document.getElementById("cart-aside");
@@ -24,7 +25,8 @@ export const truncate = (product: IProduct) => {
         price: product.price,
         slug: product.slug
     }
-
-    console.log("truncatedProduct ", truncatedProduct)
     return truncatedProduct;
 }
+
+export const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
+export const IMAGE_PREFIX = href + S3_ALBUM_NAME + "/";

@@ -1,10 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { AWS_BUCKET_NAME, S3_ALBUM_NAME, SHOP } from "../configuration/wwurm";
-
-const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
-const prefix = href + S3_ALBUM_NAME + "/";
+import { IMAGE_PREFIX } from "../ts/utility";
 
 export default function ImageWidget({ largeImage, smallImage }: {
     largeImage?:string;
@@ -19,7 +16,7 @@ export default function ImageWidget({ largeImage, smallImage }: {
         <ul className="thumbnail-list" role="list">
         {
             thumbs.map((thumb, index) => {
-                const src = prefix + encodeURIComponent(thumb); 
+                const src = IMAGE_PREFIX + encodeURIComponent(thumb); 
                 return ( 
                 <li key={index} className={`thumbnail ${(index === selected) ? "thumbnail-selected" : ""}`} >
                     <img src={src} onClick={() => handleSelect(index)} className="thumbnail-img"/>
@@ -30,7 +27,7 @@ export default function ImageWidget({ largeImage, smallImage }: {
         <ul className="images-list" role="list">
         {
             images.map((image, index) => {
-                const src = prefix + encodeURIComponent(image);  
+                const src = IMAGE_PREFIX + encodeURIComponent(image);  
                 return (
                 <li key={index} className="product-image-wrap">
                     <img 

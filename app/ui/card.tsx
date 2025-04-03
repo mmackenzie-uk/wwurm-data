@@ -2,20 +2,14 @@ import Link from "next/link";
 import BtnBuy from "../ui-client/btn-buy";
 import { BtnLike } from "./btns";
 import { IProduct } from "../ts/type-definitions";
+import { IMAGE_PREFIX } from "../ts/utility";
 
-import { S3_ALBUM_NAME, AWS_BUCKET_NAME } from "@/app/configuration/wwurm";
-
-const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
-const prefix = href + S3_ALBUM_NAME + "/";
-
-type ICard = {
+export default function Card({ product, index }: {
     product: IProduct;
     index?: string | number | undefined;
-}
-
-export default function Card({ product, index }: ICard ) {
+}) {
     const { name, mediumImage, slug } = product;
-    const src = prefix + encodeURIComponent(mediumImage!.split(',')[0]); 
+    const src = IMAGE_PREFIX + encodeURIComponent(mediumImage!.split(',')[0]); 
     return (
         <div key={index} className="card">                   
             <Link href={`/product/${slug}`} className="card-img-wrap">
@@ -32,4 +26,4 @@ export default function Card({ product, index }: ICard ) {
             </div>
         </div>
     );
-  }
+}

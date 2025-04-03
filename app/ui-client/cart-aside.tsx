@@ -6,10 +6,7 @@ import { AWS_BUCKET_NAME, S3_ALBUM_NAME, SHOP } from "../configuration/wwurm";
 import { store } from "@/app/persistence/cart";
 import { ICart } from "../ts/type-definitions";
 import InputNumber from "./input-number";
-import { closeCart } from "../ts/utility";
-
-const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
-const prefix = href + S3_ALBUM_NAME + "/";
+import { closeCart, IMAGE_PREFIX } from "../ts/utility";
 
 export default function CartAside() {
     const [cart, setCart] = useState<ICart>([]);
@@ -44,7 +41,7 @@ export default function CartAside() {
                     <ul className="cart-aside-items" role="list">
                     {
                         cart.map(({id, name, price, smallImage, slug, qty}) => {                      
-                            const src = prefix + encodeURIComponent(smallImage!.split(',')[0]); 
+                            const src = IMAGE_PREFIX + encodeURIComponent(smallImage!.split(',')[0]); 
                             return ( 
                                 <li key={id} className="cart-aside-item">
                                     <div className="row">

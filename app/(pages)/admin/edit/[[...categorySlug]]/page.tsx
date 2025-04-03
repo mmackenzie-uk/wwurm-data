@@ -1,7 +1,8 @@
 
 import { handleProduct, getCategories, getProductPageData } from "@/app/actions/database";
 import getPhotos from "@/app/actions/s3-bucket";
-import { AWS_BUCKET_NAME, S3_ALBUM_NAME } from "@/app/configuration/wwurm";
+import { S3_ALBUM_NAME } from "@/app/configuration/wwurm";
+import { href } from "@/app/ts/utility";
 import Link from "next/link";
 
 export default async function Product({ params, }: {params: Promise<{ categorySlug: string }>}) {
@@ -22,8 +23,7 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
     const categoryId = edit ? product!.categoryId : -1;
     const images = edit ? product?.largeImage : "";
 
-    const albumName = S3_ALBUM_NAME;
-    const albumPhotosKey = encodeURIComponent(albumName) + "/";
+    const albumPhotosKey = encodeURIComponent(S3_ALBUM_NAME) + "/";
 
     return (
         <form className="product" action={handleProduct}>          
@@ -54,8 +54,7 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
                             <ul className="bucket-image-widget-list" role="list">
                             {
                                 photos && photos.map((photo) => {   
-                                    const photoKey = photo.Key;
-                                    const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
+                                    const photoKey = photo.Key;                         
                                     const photoUrl = href + encodeURIComponent(photoKey!);  
                                     const name = photoKey!.replace(albumPhotosKey, "");   
                                     let title = name.replaceAll("-", " ");                

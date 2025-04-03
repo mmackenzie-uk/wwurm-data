@@ -1,12 +1,9 @@
 import { findAll, getCount } from "@/app/actions/database"
-import { AWS_BUCKET_NAME, S3_ALBUM_NAME } from "@/app/configuration/wwurm";
+import { IMAGE_PREFIX } from "@/app/ts/utility";
 import Pagination from "@/app/ui-client/pagination";
 import Link from "next/link";
 
 const ITEMS_PER_PAGE = 5;
-
-const href = `https://${AWS_BUCKET_NAME}.s3.eu-west-2.amazonaws.com/`;
-const prefix = href + S3_ALBUM_NAME + "/";
 
 export default async function Page(props: { searchParams?: Promise<{ page?: string; }>; }) {
 
@@ -44,7 +41,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                 </li>
             {
                 products.map(({ name, id, price, availability, slug, smallImage }) => {
-                    const src = prefix + encodeURIComponent(smallImage!.split(',')[0]); 
+                    const src = IMAGE_PREFIX + encodeURIComponent(smallImage!.split(',')[0]); 
                     return (
                         <li key={id} className="admin-list-item">
                             <span>{id}</span>
