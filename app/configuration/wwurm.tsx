@@ -110,4 +110,5 @@ export const CART_CLOSED_POSITION = "-410px";
 export const CART_OPENED_POSITION = "0px";
 
 export const S3_ALBUM_NAME = "all-produkte";
-export const AWS_BUCKET_NAME="wwurm-mackenzie"
+export const AWS_BUCKET_NAME="wwurm-mackenzie";
+export const AWS_REGION="eu-west-2";
