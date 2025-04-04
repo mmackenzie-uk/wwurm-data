@@ -42,12 +42,14 @@ export async function findAll(currentPage = 1, ITEMS_PER_PAGE = 5) {
     return products;
 }
 
-export async function findByCategory(slug: string) {
+export async function findByCategory(categoryId: number, currentPage = 1, ITEMS_PER_PAGE = 5) {
+
+    const OFFSET = (currentPage - 1) * ITEMS_PER_PAGE;
     const db = await openDb();
-    const category = await getCategory(slug);
-    
-    const categoryId = category.id;
-    const res = await db.all(`SELECT * FROM products WHERE categoryId = ${categoryId}`);
+    const sql = `SELECT * FROM products WHERE categoryId = ${categoryId} 
+        ORDER BY id DESC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`
+    const res = await db.all(sql);
+
     const products: Array<IProduct> = [];
     res.forEach((obj) => {
         const product = toProduct(obj)
