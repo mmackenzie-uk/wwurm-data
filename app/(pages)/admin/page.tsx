@@ -1,4 +1,4 @@
-import { findAll, getCount } from "@/app/actions/database"
+import { deleteProduct, findAll, getCount } from "@/app/actions/database"
 import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
 
 import Pagination from "@/app/ui-client/pagination";
@@ -43,6 +43,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
             {
                 products.map(({ name, id, price, availability, slug, smallImage }) => {
                     const src = IMAGE_PREFIX + encodeURIComponent(smallImage!.split(',')[0]); 
+                    const deleteProductWithId = deleteProduct.bind(null, id);
                     return (
                         <li key={id} className="admin-list-item">
                             <span>{id}</span>
@@ -59,7 +60,9 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                             >
                                 Edit
                             </Link>
-                            <button className="admin-list-btn delete">- Delete</button>
+                            <form action={deleteProductWithId}>
+                                <button type="submit" className="admin-list-btn delete">- Delete</button>
+                            </form>                           
                         </li>
                     )
                 })

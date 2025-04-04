@@ -2,6 +2,7 @@
 
 import { ICategory, IProduct, IResponse } from "../ts/type-definitions";
 import { openDb } from "../data/db";
+import { revalidatePath } from "next/cache";
 
 const toProduct = (res: IResponse) => {
     return {
@@ -116,9 +117,7 @@ export async function getCount(ITEMS_PER_PAGE: number) {
  }
 
  async function editProduct(formData: FormData) {
-    console.log("edit called");
-    console.log("formData", formData);
-
+ 
     const price = Number(formData.get("price")) * 100;
     const name = formData.get("name");
     const id = Number(formData.get("id"));
@@ -143,6 +142,44 @@ export async function getCount(ITEMS_PER_PAGE: number) {
  }
 
  async function createProduct(formData: FormData) {
-    console.log("create called");
-    console.log("formData", formData)
+    const price = Number(formData.get("price")) * 100;
+    const name = formData.get("name");
+    const description = formData.get("description");
+    const categoryId = Number(formData.get("categoryId"));
+    const image = formData.getAll("image").toString();
+    const slug = "test";
+    const availability = 10;
+    const smallImage = image;
+    const mediumImage = image;
+    const largeImage = image;
+
+    const db = await openDb();
+    const res = await db.run(
+        `INSERT INTO products ( name, 
+                                smallImage,
+                                mediumImage,
+                                largeImage,
+                                slug,
+                                description,
+                                availability,
+                                price,
+                                categoryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+                                  name, 
+                                  smallImage, 
+                                  mediumImage, 
+                                  largeImage, 
+                                  slug,
+                                  description,
+                                  availability, 
+                                  price, 
+                                  categoryId);
+    
+    return res;
  }
+
+export async function deleteProduct(id: number) {
+    const db = await openDb();
+    const res = await db.all(`DELETE FROM products WHERE id=${id}`);
+    revalidatePath('/admin');
+ }
+
