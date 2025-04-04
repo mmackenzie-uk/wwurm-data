@@ -1,6 +1,6 @@
 import { deleteProduct, findAll, getCount } from "@/app/actions/database"
 import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
-import { BinIcon, AddIcon, AddIconEncl, EditIcon } from "@/app/icons-svg";
+import { BinIcon, AddIcon, EditIcon } from "@/app/icons-svg";
 
 import Pagination from "@/app/ui-client/pagination";
 import Link from "next/link";
@@ -19,16 +19,16 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
 
     return (
         <div className="admin">
-            <div className="create-wrap">
-                <h2 className="admin-list-title">Products List</h2>
-                <div className="admin-list-nav">
+            <div className="admin-header-wrap">
+                <h2 className="admin-header-title">Products List</h2>
+                <div className="admin-header-nav">
                     <Pagination count={count} />
                     <Link
                         href={`/admin/edit/`}
-                        className="create-btn-wrap"
+                        className="admin-create-btn-wrap"
                     >
-                        <i className="create-btn-icon"><AddIcon /></i>
-                        <div className="create-btn-txt">Item</div>
+                        <i className="admin-create-btn-icon"><AddIcon /></i>
+                        <div className="admin-create-btn-txt">Item</div>
                     </Link>
                 </div>     
             </div>
@@ -61,13 +61,13 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                             <div className="admin-btn-wrap">
                                 <Link
                                     href={`/admin/edit/${slug}`}
-                                    className="edit-btn"
+                                    className="admin-edit-btn"
                                 >
-                                    <i className="admin-btn-icon"><EditIcon /></i>
+                                    <i className="admin-edit-btn-icon"><EditIcon /></i>
                                 </Link>
                                 <form action={deleteProductWithId}>
-                                    <button type="submit" className="delete-btn">
-                                        <i className="admin-btn-icon"><BinIcon /></i>
+                                    <button type="submit" className="admin-delete-btn">
+                                        <i className="admin-delete-btn-icon"><BinIcon /></i>
                                     </button>
                                 </form>           
                             </div>                  
