@@ -4,6 +4,7 @@ import { ICategory, IProduct, IResponse } from "../ts/type-definitions";
 import { openDb } from "../data/db";
 import { revalidatePath } from "next/cache";
 import { createSlug } from "../data/data-conversion";
+import { redirect } from "next/navigation";
 
 const toProduct = (res: IResponse) => {
     return {
@@ -30,7 +31,7 @@ export async function findAll(currentPage = 1, ITEMS_PER_PAGE = 5) {
 
     const OFFSET = (currentPage - 1) * ITEMS_PER_PAGE;
     const db = await openDb();
-    const res = await db.all(`SELECT * FROM products ORDER BY id ASC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`);
+    const res = await db.all(`SELECT * FROM products ORDER BY id DESC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`);
 
     const products: Array<IProduct> = [];
 
@@ -108,11 +109,14 @@ export async function getCount(ITEMS_PER_PAGE: number) {
 }
 
  export async function handleProduct(formData: FormData) {
+    
     if (formData.get("id")) {
-        editProduct(formData);
+        await editProduct(formData);
     } else {
-        createProduct(formData);
+        await createProduct(formData);
     } 
+    revalidatePath('/admin');
+    redirect('/admin');
  }
 
  async function editProduct(formData: FormData) {
@@ -136,7 +140,6 @@ export async function getCount(ITEMS_PER_PAGE: number) {
         WHERE id = ${id}`;
 
     const res = await db.all(sql);
-    
     return res;
  }
 
@@ -163,6 +166,7 @@ export async function getCount(ITEMS_PER_PAGE: number) {
     ];
 
     const res = await db.run(sql, ...params);
+
     return res;
  }
 
