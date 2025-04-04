@@ -1,8 +1,11 @@
 import { deleteProduct, findAll, getCount } from "@/app/actions/database"
 import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
+import { BinIcon, AddIcon, AddIconEncl, EditIcon } from "@/app/icons-svg";
 
 import Pagination from "@/app/ui-client/pagination";
 import Link from "next/link";
+
+
 
 const ITEMS_PER_PAGE = 5;
 
@@ -22,9 +25,10 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                     <Pagination count={count} />
                     <Link
                         href={`/admin/edit/`}
-                        className="admin-list-btn create"
+                        className="create-btn-wrap"
                     >
-                        + New
+                        <i className="create-btn-icon"><AddIcon /></i>
+                        <div className="create-btn-txt">Item</div>
                     </Link>
                 </div>     
             </div>
@@ -54,15 +58,19 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                             <span>{slug}</span>
                             <span>{price}</span>
                             <span>{availability}</span>
-                            <Link
-                                href={`/admin/edit/${slug}`}
-                                className="admin-list-btn edit"
-                            >
-                                Edit
-                            </Link>
-                            <form action={deleteProductWithId}>
-                                <button type="submit" className="admin-list-btn delete">- Delete</button>
-                            </form>                           
+                            <div className="admin-btn-wrap">
+                                <Link
+                                    href={`/admin/edit/${slug}`}
+                                    className="edit-btn"
+                                >
+                                    <i className="admin-btn-icon"><EditIcon /></i>
+                                </Link>
+                                <form action={deleteProductWithId}>
+                                    <button type="submit" className="delete-btn">
+                                        <i className="admin-btn-icon"><BinIcon /></i>
+                                    </button>
+                                </form>           
+                            </div>                  
                         </li>
                     )
                 })

@@ -19,7 +19,7 @@ li.admin-list-item {
     color: #444;
     /* font-weight: bold; */
     
-    grid-template-columns: 50px 120px 1fr 1fr 100px 100px 80px 80px;
+    grid-template-columns: 50px 120px 1fr 1fr 100px 100px 180px;
     row-gap: 20px;
     border: 1px solid #bbb;
     background-color: #eee;
@@ -66,33 +66,6 @@ li.admin-list-item {
     opacity: .82;
 }
 
-.create-wrap {
-    margin: 0 auto;
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    /* margin-top: 20px; */
-    margin-bottom: 20px;;
-    padding-top: 20px;
-}
-
-.create-btn {
-    width: 90px;
-    height: 30px;
-    margin-bottom: 20px;
-    background: #BDC2C8;
-    border: 1px solid #555;
-    font-family: sans-serif;
-    color: #666;
-    border-radius: 2px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.create-btn:hover {
-    cursor: pointer;
-    opacity: .82;
-}
 
 .admin-list-title {
     font-size: 24px;
@@ -145,4 +118,120 @@ li.admin-list-item {
 .admin-list-img {
     height: 100%;
     width: 100%;
+}
+
+
+.delete-btn svg {
+    background-color: #fff;
+    fill: #888;
+    height: 30px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+   }
+   
+   .delete-btn {
+     margin: 0;
+     padding: 0;
+     height: 32px;
+     border: 1px solid #999;
+     border-radius: 5px;
+     width: 50px;
+     background-color: #fff;
+   }
+   
+   .edit-btn {
+     text-align: center;
+     margin: 0;
+     padding: 0;
+     height: 32px;
+     border: 1px solid #999;
+     border-radius: 5px;
+     width: 50px;
+     background-color: #fff;
+   }
+
+   .edit-btn:hover,
+   .delete-btn:hover {
+        cursor: pointer;
+        opacity: .82;
+   }
+   
+   .edit-btn svg {
+     background-color: #fff;
+     fill: #999;
+     height: 30px;
+     text-align: center;
+     margin: 0;
+     padding: 0;
+   }
+
+   .admin-btn-wrap {
+        display: flex;
+        justify-content: flex-end;
+        gap: 5px;
+    }
+   
+   .admin-btn-icon {
+        width: 16px;
+        height: 16px;
+   }
+
+   .create-wrap {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 20px; */
+    margin-bottom: 20px;;
+    padding-top: 20px;
+}
+
+.create-btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    border-radius: 5px;
+    width: 80px;
+    margin-left: 20px;
+    text-decoration: none;
+    line-height: 16px;
+    font-family: sans-serif;
+    background: #5e6872;
+    border: 1px solid #555;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.create-btn-wrap:hover {
+    opacity: .82;
+}
+
+.create-btn:hover {
+    cursor: pointer;
+    opacity: .82;
+}
+
+
+.create-btn-icon {
+    fill: #f7f7f7;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.create-btn-icon svg {
+
+}
+
+.create-btn-txt {
+    margin-left: 2px;
+    font-size: 14px;
+    line-height: 16px;
 }
