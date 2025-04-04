@@ -22,6 +22,7 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
     const price = edit ? product!.price : 1;
     const categoryId = edit ? product!.categoryId : -1;
     const images = edit ? product?.largeImage : "";
+    const availability = edit ? product?.availability : 1;
 
     const albumPhotosKey = encodeURIComponent(S3_ALBUM_NAME) + "/";
 
@@ -106,7 +107,16 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
                                 step=".1"
                             />
                         </span><br/>
-                        <label htmlFor="price" className="edit-form-label">Description:</label>
+                        <label htmlFor="availability" className="edit-form-label">Quantity:</label><br/>
+                        <input 
+                            id="availability"
+                            name="availability"
+                            type="number" 
+                            className="edit-form-availability" 
+                            defaultValue={availability}
+                        /> 
+                        <br/>
+                        <label htmlFor="description" className="edit-form-label">Description:</label>
                         <textarea 
                             id="description" 
                             name="description" 

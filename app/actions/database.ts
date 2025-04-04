@@ -129,6 +129,7 @@ export async function getCount(ITEMS_PER_PAGE: number) {
     const description = formData.get("description");
     const categoryId = Number(formData.get("categoryId"));
     const image = formData.getAll("image").toString();
+    const availability = Number(formData.get("availability"));
 
     const db = await openDb();
     const sql =` UPDATE products
@@ -138,6 +139,7 @@ export async function getCount(ITEMS_PER_PAGE: number) {
         smallImage="${image}",
         mediumImage="${image}",
         largeImage="${image}",
+        availability=${availability},
         categoryId=${categoryId}
         WHERE id = ${id}`;
 
@@ -152,7 +154,7 @@ export async function getCount(ITEMS_PER_PAGE: number) {
     const categoryId = Number(formData.get("categoryId"));
     const image = formData.getAll("image").toString();
     const slug = createSlug(name);
-    const availability = 10;
+    const availability = Number(formData.get("availability"));
     const smallImage = image;
     const mediumImage = image;
     const largeImage = image;
