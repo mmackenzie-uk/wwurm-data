@@ -3,6 +3,7 @@
 import { ICategory, IProduct, IResponse } from "../ts/type-definitions";
 import { openDb } from "../data/db";
 import { revalidatePath } from "next/cache";
+import { createSlug } from "../data/data-conversion";
 
 const toProduct = (res: IResponse) => {
     return {
@@ -30,8 +31,6 @@ export async function findAll(currentPage = 1, ITEMS_PER_PAGE = 5) {
     const OFFSET = (currentPage - 1) * ITEMS_PER_PAGE;
     const db = await openDb();
     const res = await db.all(`SELECT * FROM products ORDER BY id ASC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`);
-
-    // LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
 
     const products: Array<IProduct> = [];
 
@@ -143,37 +142,27 @@ export async function getCount(ITEMS_PER_PAGE: number) {
 
  async function createProduct(formData: FormData) {
     const price = Number(formData.get("price")) * 100;
-    const name = formData.get("name");
+    const name = formData.get("name")?.toString();
     const description = formData.get("description");
     const categoryId = Number(formData.get("categoryId"));
     const image = formData.getAll("image").toString();
-    const slug = "test";
+    const slug = createSlug(name);
     const availability = 10;
     const smallImage = image;
     const mediumImage = image;
     const largeImage = image;
 
     const db = await openDb();
-    const res = await db.run(
-        `INSERT INTO products ( name, 
-                                smallImage,
-                                mediumImage,
-                                largeImage,
-                                slug,
-                                description,
-                                availability,
-                                price,
-                                categoryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
-                                  name, 
-                                  smallImage, 
-                                  mediumImage, 
-                                  largeImage, 
-                                  slug,
-                                  description,
-                                  availability, 
-                                  price, 
-                                  categoryId);
-    
+
+    const sql = `INSERT INTO products ( 
+        name,smallImage,mediumImage,largeImage,slug,description,availability,price,categoryId
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    const params = [
+        name, smallImage, mediumImage, largeImage, slug, description, availability, price, categoryId
+    ];
+
+    const res = await db.run(sql, ...params);
     return res;
  }
 
