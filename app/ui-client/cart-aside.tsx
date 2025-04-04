@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { AWS_BUCKET_NAME, S3_ALBUM_NAME, SHOP } from "../configuration/wwurm";
 import { store } from "@/app/persistence/cart";
 import { ICart } from "../ts/type-definitions";
 import InputNumber from "./input-number";
-import { closeCart, IMAGE_PREFIX } from "../ts/utility";
+import { closeCart } from "../ts/ui";
+import { IMAGE_PREFIX } from "../configuration/s3-configuration";
 
 export default function CartAside() {
     const [cart, setCart] = useState<ICart>([]);

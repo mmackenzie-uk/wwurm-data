@@ -1,5 +1,6 @@
 import { findAll, getCount } from "@/app/actions/database"
-import { IMAGE_PREFIX } from "@/app/ts/utility";
+import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
+
 import Pagination from "@/app/ui-client/pagination";
 import Link from "next/link";
 

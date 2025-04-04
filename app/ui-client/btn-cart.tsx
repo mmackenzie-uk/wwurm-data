@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { store } from "@/app/persistence/cart";
-import { openCart } from "../ts/utility";
+import { openCart } from "../ts/ui";
 
 export default function BtnCart() {
     const [count, setCount] = useState(0);

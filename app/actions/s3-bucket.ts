@@ -15,7 +15,7 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 });
 const client = new S3Client({});
 
-export default async function getPhotos() {
+export async function getPhotos() {
 
     const command = new ListObjectsV2Command({
         Bucket: AWS_BUCKET_NAME,

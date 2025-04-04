@@ -1,10 +1,9 @@
 "use client"
 
 import { store } from "@/app/persistence/cart";
-
 import { IProduct } from "../ts/type-definitions";
-import { openCart } from "../ts/utility";
-import { truncate } from "../ts/utility";
+import { openCart } from "../ts/ui";
+import { truncate } from "../data/data-conversion";
 
 export default function BtnBuy({ product } : {
     product: IProduct

@@ -50,13 +50,6 @@ export const CAROUSEL_INTERVAL = 10000;
 export const BRAND = "/brand.svg";
 export const CAROUSEL_INIT_STATE = 0;
 
-// export const NAV = [
-//     { name: "About Us", url: "/about" },
-//     { name: "Contact", url: "/contact" },
-//     { name: "Shipping & Payment", url: "/shipping" }
-//   ];
-  
-
 export const NAV = [
   {name: "Das Gustergut", url: "/about"},
   {name: "Kontakt", url: "/contact"}
@@ -86,29 +79,10 @@ export const ICON_LIST = [
   { icon: "cm-font-pinterest", url: ""}
 ]
 
-// export type ICategory = { 
-//   [key: string]: string | number  
-// }  
-
-export type ICategory = { 
-  id: number;
-  name: string;
-  slug: string;  
-}  
-
-/* maps from nav menu to Category name */
-// export const CATEGORY: ICategory = {
-//   "edelbrand": "Edelbrand",
-//   "wein": "Wein",
-//   "schaumwein": "Schaumwein",
-//   "most": "Most",
-//   "saft": "Saft",
-//   "pesto-fruchtaufstrich": "Pesto und Fruchtaufstriche"
-// };
-
 export const CART_CLOSED_POSITION = "-410px";
 export const CART_OPENED_POSITION = "0px";
 
 export const S3_ALBUM_NAME = "all-produkte";
 export const AWS_BUCKET_NAME="wwurm-mackenzie";
 export const AWS_REGION="eu-west-2";
+

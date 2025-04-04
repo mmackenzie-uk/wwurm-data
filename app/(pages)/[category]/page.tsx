@@ -1,7 +1,6 @@
 import Products from "@/app/ui/products";
 import LoadMore from "@/app/ui/load";
 import { findByCategory, getCategory } from "@/app/actions/database";
-import { IProduct } from "@/app/ts/type-definitions";
 
 export default async function CategoryPage({ params, }: {params: Promise<{ category: string }>}) {
     const { category } = await params;

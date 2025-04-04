@@ -1,21 +1,7 @@
 "use server"
 
-import { IProduct } from "../ts/type-definitions";
+import { ICategory, IProduct, IResponse } from "../ts/type-definitions";
 import { openDb } from "../data/db";
-import { ICategory } from "../configuration/wwurm";
-
-type IResponse = {
-    id: number;
-    name: string,
-    price: number,
-    description: string,
-    smallImage: string,
-    mediumImage: string,
-    largeImage: string,
-    availability: number, 
-    slug: string,
-    categoryId: number
-}
 
 const toProduct = (res: IResponse) => {
     return {
@@ -33,7 +19,6 @@ const toProduct = (res: IResponse) => {
 }
 
 export async function getCategories() {
-    // Open database
     const db = await openDb();
     const res = await db.all('SELECT * FROM categories');
     return res as Array<ICategory>;
@@ -42,7 +27,6 @@ export async function getCategories() {
 export async function findAll(currentPage = 1, ITEMS_PER_PAGE = 5) {
 
     const OFFSET = (currentPage - 1) * ITEMS_PER_PAGE;
-    // Open database
     const db = await openDb();
     const res = await db.all(`SELECT * FROM products ORDER BY id ASC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`);
 
@@ -58,7 +42,6 @@ export async function findAll(currentPage = 1, ITEMS_PER_PAGE = 5) {
 }
 
 export async function findByCategory(slug: string) {
-    // Open database
     const db = await openDb();
     const category = await getCategory(slug);
     
@@ -73,30 +56,24 @@ export async function findByCategory(slug: string) {
 }
 
 export async function getProduct(slug: string) {
-    // Open database
     const db = await openDb();
     const res = await db.all(`SELECT * FROM products WHERE slug = "${slug}"`);
     return toProduct(res[0]);
 }
 
 export async function getCategory(slug: string) {
-    // Open database
     const db = await openDb();
     const res = await db.all(`SELECT * FROM categories WHERE slug = "${slug}"`);
-
-    console.log("res slug ", res, slug)
     return res[0];
 }
 
 export async function getCategoryById(id: number) {
-    // Open database
     const db = await openDb();
     const res = await db.all(`SELECT * FROM categories WHERE id = ${id}`);
     return res[0];
 }
 
 export async function getSimilar(categoryId: number, slug: string) {
-     // Open database
      const db = await openDb();
      const res = await db.all(`SELECT * FROM products WHERE categoryId = ${categoryId} AND NOT slug = "${slug}"`);
      const products: Array<IProduct> = [];

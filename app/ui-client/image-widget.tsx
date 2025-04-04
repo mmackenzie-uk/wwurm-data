@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { IMAGE_PREFIX } from "../ts/utility";
+import { IMAGE_PREFIX } from "../configuration/s3-configuration";
 
 export default function ImageWidget({ largeImage, smallImage }: {
     largeImage?:string;

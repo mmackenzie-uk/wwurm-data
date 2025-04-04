@@ -2,7 +2,7 @@ import Link from "next/link";
 import BtnBuy from "../ui-client/btn-buy";
 import { BtnLike } from "./btns";
 import { IProduct } from "../ts/type-definitions";
-import { IMAGE_PREFIX } from "../ts/utility";
+import { IMAGE_PREFIX } from "../configuration/s3-configuration";
 
 export default function Card({ product, index }: {
     product: IProduct;

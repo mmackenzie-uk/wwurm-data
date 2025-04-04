@@ -4,7 +4,7 @@ import {  store } from "@/app/persistence/cart";
 import { ITruncatedProduct, IProduct } from "../ts/type-definitions"
 
 import { useState } from "react";
-import { openCart } from "../ts/utility";
+import { openCart } from "../ts/ui";
 import InputNumber from "./input-number";
 
 type IBtnBuy = {
