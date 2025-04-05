@@ -11,14 +11,6 @@ export type IProduct = {
     categoryId: number;
 }
 
-export type ITruncatedProduct = {
-    id: number,
-    name: string,
-    smallImage?: string,
-    price: number,
-    slug: string
-}
-
 export type ICartItem = {
     id: number,
     name: string,
@@ -46,7 +38,7 @@ export interface IStore {
     getCart: () => ICart;
     sync: () => void;
     find: (id: number) => ICartItem | undefined;
-    add: (truncatedProduct: ITruncatedProduct) => void;
+    add: (cartItem: ICartItem) => void;
     increase: (id : number, qty: number) => void;
     reduce: (id : number) => void;
     remove: (id: number) => void;
@@ -66,4 +58,14 @@ export type IResponse = {
     availability: number, 
     slug: string,
     categoryId: number
+}
+
+export type IFormParams = {
+    id?: number,
+    name: string,
+    description?: string,
+    price: number,
+    categoryId: number,
+    smallImage?: string,
+    availability?: number
 }

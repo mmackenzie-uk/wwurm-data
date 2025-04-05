@@ -1,6 +1,6 @@
 "use client"
 
-import { ICallback, ICart, IStore, ITruncatedProduct,  } from "../ts/type-definitions";
+import { ICallback, ICart, ICartItem, IStore  } from "../ts/type-definitions";
 
 /* Localstorage is used for state management as state is not preserved from server
  side render of Nextjs */
@@ -60,25 +60,18 @@ class Store implements IStore {
             return match[0];
     }
 
-    add (truncatedProduct: ITruncatedProduct, qty=1) {
+    add (cartItem: ICartItem) {
         //add a new item to the cart
         //check that it is not in the cart already
-        const id = truncatedProduct.id;
+        const id = cartItem.id;
         if( this.find(id) ){
             this.cart = this.cart.map(item => {
                 if( item.id === id )
-                    item.qty = item.qty + qty;
+                    item.qty = item.qty + cartItem.qty;
                 return item;
             });
         } else {
-            this.cart.push({
-                id: truncatedProduct.id,
-                name: truncatedProduct.name,
-                qty: qty,
-                price: truncatedProduct.price,
-                slug: truncatedProduct.slug,
-                smallImage: truncatedProduct.smallImage
-            });
+            this.cart.push(cartItem);
         } 
         this.sync();
         this.triggerCallbacks();  

@@ -3,15 +3,15 @@
 import { store } from "@/app/persistence/cart";
 import { IProduct } from "../ts/type-definitions";
 import { openCart } from "../ts/ui";
-import { truncate } from "../data/data-conversion";
+import { toCartItem } from "../data/data-conversion";
 
 export default function BtnBuy({ product } : {
     product: IProduct
 }) {
 
-    const truncatedProduct = truncate(product);
+    const cartItem = toCartItem(product);
     const addItem = () => {
-        store.add(truncatedProduct);
+        store.add(cartItem);
         openCart();
     }
 

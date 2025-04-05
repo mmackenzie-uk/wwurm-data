@@ -1,25 +1,10 @@
 "use server"
 
-import { ICategory, IProduct, IResponse } from "../ts/type-definitions";
+import { ICategory, IProduct } from "../ts/type-definitions";
 import { openDb } from "../data/db";
 import { revalidatePath } from "next/cache";
-import { createSlug } from "../data/data-conversion";
+import { fromFormData, toProduct } from "../data/data-conversion";
 import { redirect } from "next/navigation";
-
-const toProduct = (res: IResponse) => {
-    return {
-        id: res.id,
-        name: res.name,
-        price: res.price / 100,
-        description: res.description,
-        smallImage: res.smallImage.replaceAll("\"", ""), 
-        mediumImage: res.mediumImage.replaceAll("\"", ""),
-        largeImage: res.largeImage.replaceAll("\"", ""),
-        availability: res.availability, 
-        slug: res.slug,
-        categoryId: res.categoryId
-    }
-}
 
 export async function getCategories() {
     const db = await openDb();
@@ -111,7 +96,6 @@ export async function getCount(ITEMS_PER_PAGE: number) {
 }
 
  export async function handleProduct(formData: FormData) {
-    
     if (formData.get("id")) {
         await editProduct(formData);
     } else {
@@ -122,42 +106,26 @@ export async function getCount(ITEMS_PER_PAGE: number) {
  }
 
  async function editProduct(formData: FormData) {
- 
-    const price = Number(formData.get("price")) * 100;
-    const name = formData.get("name");
-    const id = Number(formData.get("id"));
-    const description = formData.get("description");
-    const categoryId = Number(formData.get("categoryId"));
-    const image = formData.getAll("image").toString();
-    const availability = Number(formData.get("availability"));
-
+    const product = fromFormData(formData);
     const db = await openDb();
     const sql =` UPDATE products
-        SET price = ${price},
-        name="${name}",
-        description="${description}",
-        smallImage="${image}",
-        mediumImage="${image}",
-        largeImage="${image}",
-        availability=${availability},
-        categoryId=${categoryId}
-        WHERE id = ${id}`;
+        SET price = ${product.price},
+        name="${product.name}",
+        description="${product.description}",
+        smallImage="${product.smallImage}",
+        mediumImage="${product.mediumImage}",
+        largeImage="${product.largeImage}",
+        availability=${product.availability},
+        slug="${product.slug}",
+        categoryId=${product.categoryId}
+        WHERE id = ${product.id}`;
 
     const res = await db.all(sql);
     return res;
  }
 
  async function createProduct(formData: FormData) {
-    const price = Number(formData.get("price")) * 100;
-    const name = formData.get("name")?.toString();
-    const description = formData.get("description");
-    const categoryId = Number(formData.get("categoryId"));
-    const image = formData.getAll("image").toString();
-    const slug = createSlug(name);
-    const availability = Number(formData.get("availability"));
-    const smallImage = image;
-    const mediumImage = image;
-    const largeImage = image;
+    const product = fromFormData(formData);
 
     const db = await openDb();
 
@@ -166,7 +134,15 @@ export async function getCount(ITEMS_PER_PAGE: number) {
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const params = [
-        name, smallImage, mediumImage, largeImage, slug, description, availability, price, categoryId
+        product.name, 
+        product.smallImage, 
+        product.mediumImage, 
+        product.largeImage, 
+        product.slug, 
+        product.description, 
+        product.availability, 
+        product.price, 
+        product.categoryId
     ];
 
     const res = await db.run(sql, ...params);
@@ -176,7 +152,7 @@ export async function getCount(ITEMS_PER_PAGE: number) {
 
 export async function deleteProduct(id: number) {
     const db = await openDb();
-    const res = await db.all(`DELETE FROM products WHERE id=${id}`);
+    await db.all(`DELETE FROM products WHERE id=${id}`);
     revalidatePath('/admin');
  }
 

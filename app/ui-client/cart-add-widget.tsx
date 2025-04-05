@@ -1,41 +1,24 @@
 "use client"
 
 import {  store } from "@/app/persistence/cart";
-import { ITruncatedProduct, IProduct } from "../ts/type-definitions"
+import { ITruncatedProduct, IProduct, ICartItem } from "../ts/type-definitions"
 
 import { useState } from "react";
 import { openCart } from "../ts/ui";
 import InputNumber from "./input-number";
+import { toCartItem } from "../data/data-conversion";
 
-type IBtnBuy = {
-    product?: IProduct
-}
-
-export default function CartAdd({ product } : IBtnBuy) {
+export default function CartAdd({ product } : { product : IProduct}) {
     const [count, setCount ] = useState(1);
 
-    let truncatedProduct : ITruncatedProduct;
-
-    if (product) {
-        truncatedProduct = {
-            id: product.id,
-            name: product.name,
-            image: product.smallImage? product.smallImage[0] : "",
-            price: product.price,
-            slug: product.slug
-        }
-    }
-    
     const addItem = () => {
-        if (truncatedProduct) {
-            store.add(truncatedProduct, count);
-            openCart();
-        }
+        let cartItem = toCartItem(product);
+        cartItem.qty = count;
+        store.add(cartItem);
+        openCart();
     }
 
-    const increment = () => {
-        setCount(c => count + 1)
-    }
+    const increment = () => setCount(c => count + 1);
 
     const decrement = () => {
         if (count > 1) {
