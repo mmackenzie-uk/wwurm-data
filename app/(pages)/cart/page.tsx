@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { SHOP } from "@/app/configuration/wwurm"; 
-import { store } from "@/app/persistence/cart";
+import { store } from "@/app/cart-store/cart";
 import { ICart } from "@/app/ts/type-definitions";
 import InputNumber from "@/app/ui-client/input-number";
 

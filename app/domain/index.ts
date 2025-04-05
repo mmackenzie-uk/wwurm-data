@@ -12,7 +12,7 @@ export const toCartItem = (product: IProduct, qty = 1) => {
     return cartItem;
 }
 
-export const createSlug = (name: string | undefined) => {
+const createSlug = (name: string | undefined) => {
     if (!name) return;
     let slug = name.replaceAll(" ", "-")
     return slug.toLowerCase();

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { store } from "@/app/persistence/cart";
+import { store } from "@/app/cart-store/cart";
 import { ICart } from "../ts/type-definitions";
 import InputNumber from "./input-number";
 import { closeCart } from "../ts/ui";

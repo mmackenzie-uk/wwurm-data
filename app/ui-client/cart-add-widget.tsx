@@ -1,12 +1,12 @@
 "use client"
 
-import {  store } from "@/app/persistence/cart";
+import {  store } from "@/app/cart-store/cart";
 import { ITruncatedProduct, IProduct, ICartItem } from "../ts/type-definitions"
 
 import { useState } from "react";
 import { openCart } from "../ts/ui";
 import InputNumber from "./input-number";
-import { toCartItem } from "../data/data-conversion";
+import { toCartItem } from "../domain";
 
 export default function CartAdd({ product } : { product : IProduct}) {
     const [count, setCount ] = useState(1);

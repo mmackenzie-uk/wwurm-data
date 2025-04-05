@@ -1,11 +1,11 @@
 "use client"
 
+import { CART_KEY } from "../configuration/wwurm";
 import { ICallback, ICart, ICartItem, IStore  } from "../ts/type-definitions";
 
 /* Localstorage is used for state management as state is not preserved from server
  side render of Nextjs */
 
-const CART_KEY = "wwurm-access-key";
 
 /* Singleton - must be a singleton to work */
 let instance: Store;

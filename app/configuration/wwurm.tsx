@@ -6,7 +6,7 @@ export const ABOUT_IMG = "/images/about.jpg";
 export const ABOUT_TITLE = "Gutes vom Gustergut seit 1324";
 export const ABOUT_CAPTION = "Unser Versprechen";
 export const CONTACT_IMG = "/images/about.jpg";
-export const CONTACT_TITLE = "Charm Accessories - Contact";
+export const CONTACT_TITLE = "Zum Gustergut – Kontakt";
 
 export const ABOUT_TEXT = [
 "Die Essenz aus der Natur.",
@@ -86,3 +86,4 @@ export const S3_ALBUM_NAME = "all-produkte";
 export const AWS_BUCKET_NAME="wwurm-mackenzie";
 export const AWS_REGION="eu-west-2";
 
+export const CART_KEY = "wwurm-access-key";

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { store } from "@/app/persistence/cart";
+import { store } from "@/app/cart-store/cart";
 import { openCart } from "../ts/ui";
 
 export default function BtnCart() {

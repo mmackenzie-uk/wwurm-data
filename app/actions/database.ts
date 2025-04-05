@@ -3,7 +3,7 @@
 import { ICategory, IProduct } from "../ts/type-definitions";
 import { openDb } from "../data/db";
 import { revalidatePath } from "next/cache";
-import { fromFormData, toProduct } from "../data/data-conversion";
+import { fromFormData, toProduct } from "../domain";
 import { redirect } from "next/navigation";
 
 export async function getCategories() {

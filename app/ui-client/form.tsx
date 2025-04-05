@@ -1,15 +1,17 @@
+"use client"
+
 import { handleProduct } from "@/app/actions/database";
 import { ALBUM_PHOTO_KEY, HREF } from "@/app/configuration/s3-configuration";
 import { ICategory, IProduct } from "../ts/type-definitions";
 import Link from "next/link";
 import { _Object } from "@aws-sdk/client-s3";
-import { toFormParams } from "../data/data-conversion";
+import { toFormParams } from "../domain";
 
 
 export default function Form({ product, edit, photos, categories }: {
     product: IProduct, 
     categories: Array<ICategory>,
-    photos: _Object[] | undefined,
+    photos: _Object[],
     edit: boolean
 }) {
 
@@ -43,7 +45,7 @@ export default function Form({ product, edit, photos, categories }: {
                         <div className="bucket-image-widget-container">
                             <ul className="bucket-image-widget-list" role="list">
                             {
-                                photos && photos.map((photo) => {   
+                                photos.map((photo) => {   
                                     const photoKey = photo.Key;                         
                                     const photoUrl = HREF + encodeURIComponent(photoKey!);  
                                     const name = photoKey!.replace(ALBUM_PHOTO_KEY, "");     
