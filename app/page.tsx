@@ -1,5 +1,5 @@
 import Carousel from "./ui-client/carousel";
-import { findAll } from "./actions/database";
+import { findAll } from "./actions/database-get";
 import ProductsListByCategory from "./ui-client/products-list-by-category";
 
 export default async function Home() {

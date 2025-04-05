@@ -1,4 +1,5 @@
-import { deleteProduct, findAll, getCount } from "@/app/actions/database"
+import { deleteProduct } from "@/app/actions/database-edit"
+import { findAll, getCount } from "@/app/actions/database-get"
 import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
 import { BinIcon, AddIcon, EditIcon } from "@/app/icons-svg";
 

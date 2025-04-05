@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Dropdown from '../ui-client/dropdown';
-import { PRODUCTS_NAV, NAV, LOGO } from '../configuration/wwurm';
+import { NAV, LOGO } from '../configuration/wwurm';
 import SideCart from '../ui-client/cart-aside';
 import BtnCart from '../ui-client/btn-cart';
-import { getCategories } from '../actions/database';
+import { getCategories } from '../actions/database-get';
 
 export default async function Header() {
 

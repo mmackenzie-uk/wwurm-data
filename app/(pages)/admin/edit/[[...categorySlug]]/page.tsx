@@ -1,7 +1,9 @@
 
-import { getCategories, getProductPageData } from "@/app/actions/database";
+import { getCategories, getProductPageData } from "@/app/actions/database-get";
 import { getPhotos } from "@/app/actions/s3-bucket";
+import { toFormParams } from "@/app/domain";
 import Form from "@/app/ui-client/form";
+import { _Object } from "@aws-sdk/client-s3";
 
 export default async function Product({ params, }: {params: Promise<{ categorySlug: string }>}) {
     const { categorySlug } = await params;
@@ -13,9 +15,11 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
         product = response.product;
     }
     const categories = await getCategories();
-    const photos = await getPhotos();
+    const photos = await getPhotos() as _Object[];
 
-    return <Form product={product} categories={categories} photos={photos} edit={edit} />
+    const formParams = toFormParams(product);
+
+    return <Form formParams={formParams} categories={categories} photos={photos} edit={edit} />
 
   }
 

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { IProduct } from "../ts/type-definitions";
-import { findAll, findByCategory } from "../actions/database";
+import { findAll, findByCategory } from "../actions/database-get";
 import Card from "../ui/card";
 
 const ITEMS_PER_PAGE = 10;

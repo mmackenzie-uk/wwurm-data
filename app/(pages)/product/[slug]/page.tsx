@@ -3,7 +3,7 @@ import Card from "@/app/ui/card";
 import Link from "next/link";
 
 import { ICON_LIST} from "@/app/configuration/wwurm";
-import { getProductPageData } from "@/app/actions/database";
+import { getProductPageData } from "@/app/actions/database-get";
 import CartAddWidget from "@/app/ui-client/cart-add-widget";
 import ImageWidget from "@/app/ui-client/image-widget";
 

@@ -1,28 +1,28 @@
 "use client"
 
-import { handleProduct } from "@/app/actions/database";
+import { handleProduct } from "@/app/actions/database-edit";
 import { ALBUM_PHOTO_KEY, HREF } from "@/app/configuration/s3-configuration";
-import { ICategory, IProduct } from "../ts/type-definitions";
+import { ICategory, IFormParams, IFormState } from "../ts/type-definitions";
 import Link from "next/link";
 import { _Object } from "@aws-sdk/client-s3";
-import { toFormParams } from "../domain";
+import { useActionState } from "react";
 
-
-export default function Form({ product, edit, photos, categories }: {
-    product: IProduct, 
+export default function Form({ formParams, edit, photos, categories }: {
+    formParams: IFormParams, 
     categories: Array<ICategory>,
     photos: _Object[],
     edit: boolean
 }) {
 
-    const formParams = toFormParams(product);
+    const initialState: IFormState = { message: null, errors: {} };
+    const [state, formAction] = useActionState(handleProduct, initialState);
    
     return (
-        <form className="product" action={handleProduct}>          
+        <form className="product" action={formAction}>          
             <input 
                 type="text" 
                 name="id" 
-                defaultValue={product?.id || ""} 
+                defaultValue={formParams?.id || ""} 
                 hidden
             />
             <section className="section">
@@ -34,6 +34,21 @@ export default function Form({ product, edit, photos, categories }: {
                     </div>   
                 </div> 
             </section>
+            { 
+             state && state.message ? 
+                <section className="section">
+                    <div className="error-msg-wrap" >
+                        <p className="error-msg">
+                            {state.message} 
+                            {state.errors?.categoryId ? " Please choose a category" : ""} 
+                            {state.errors?.name ? " A product with that name already exists" : ""} 
+                        </p>
+                        <button className="error-msg-btn">x</button>
+                    </div>
+                </section> 
+                : null
+            }
+            
             <section className="section">
                 <div className="edit-product-grid">
                     <div>

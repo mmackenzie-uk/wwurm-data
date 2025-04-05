@@ -69,3 +69,11 @@ export type IFormParams = {
     smallImage?: string,
     availability?: number
 }
+
+export type IFormState = {
+    errors?: {
+        categoryId?: string[];
+        name?: string[];
+    };
+    message?: string | null;
+};
