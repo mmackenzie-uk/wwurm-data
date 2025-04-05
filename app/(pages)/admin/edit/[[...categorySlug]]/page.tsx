@@ -1,8 +1,7 @@
 
 import { handleProduct, getCategories, getProductPageData } from "@/app/actions/database";
 import { getPhotos } from "@/app/actions/s3-bucket";
-import { HREF } from "@/app/configuration/s3-configuration";
-import { S3_ALBUM_NAME } from "@/app/configuration/wwurm";
+import { ALBUM_PHOTO_KEY, HREF } from "@/app/configuration/s3-configuration";
 import Link from "next/link";
 
 export default async function Product({ params, }: {params: Promise<{ categorySlug: string }>}) {
@@ -23,8 +22,6 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
     const categoryId = edit ? product!.categoryId : -1;
     const images = edit ? product?.largeImage : "";
     const availability = edit ? product?.availability : 1;
-
-    const albumPhotosKey = encodeURIComponent(S3_ALBUM_NAME) + "/";
 
     return (
         <form className="product" action={handleProduct}>          
@@ -57,7 +54,7 @@ export default async function Product({ params, }: {params: Promise<{ categorySl
                                 photos && photos.map((photo) => {   
                                     const photoKey = photo.Key;                         
                                     const photoUrl = HREF + encodeURIComponent(photoKey!);  
-                                    const name = photoKey!.replace(albumPhotosKey, "");   
+                                    const name = photoKey!.replace(ALBUM_PHOTO_KEY, "");     
                                     let title = name.replaceAll("-", " ");                
                                     title = title.replaceAll(".jpg", "");                
                                     return (
