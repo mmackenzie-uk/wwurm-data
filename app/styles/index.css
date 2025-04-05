@@ -1,4 +1,5 @@
 @import url(about.css);
+@import url(agb.css);
 @import url(admin.css);
 @import url(btns.css);
 @import url(card.css);
@@ -9,6 +10,7 @@
 @import url(contact.css);
 @import url(dropdown.css);
 @import url(dropdown-btn.css);
+@import url(faq.css);
 @import url(footer.css);
 @import url(form.css);
 @import url(globals.css);
