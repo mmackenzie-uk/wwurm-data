@@ -1,5 +1,6 @@
-import { deleteProduct } from "@/app/actions/database-edit"
-import { findAll, getCount } from "@/app/actions/database-get"
+
+import { deleteProduct } from "@/app/actions/delete-action";
+import { findAll, getCount } from "@/app/actions/get-actions"
 import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
 import { BinIcon, AddIcon, EditIcon } from "@/app/icons-svg";
 
@@ -16,7 +17,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
     const currentPage = Number(searchParams?.page) || 1;
     const count = await getCount(ITEMS_PER_PAGE);  
     
-    const products = await findAll(currentPage);
+    const productsResponse = await findAll(currentPage, ITEMS_PER_PAGE);
 
     return (
         <div className="admin">
@@ -46,9 +47,12 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                     <span>Qty</span>
                 </li>
             {
-                products.map(({ name, id, price, availability, slug, smallImage }) => {
-                    const src = IMAGE_PREFIX + encodeURIComponent(smallImage!.split(',')[0]); 
-                    const deleteProductWithId = deleteProduct.bind(null, id);
+                productsResponse.map(({ name, id, price, availability, slug, smallImage }) => {
+                    const src = IMAGE_PREFIX + encodeURIComponent(smallImage[0]); 
+                    let deleteProductWithId;
+                    if (id) {
+                        deleteProductWithId = deleteProduct.bind(null, id);
+                    }
                     return (
                         <li key={id} className="admin-list-item">
                             <span>{id}</span>

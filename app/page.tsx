@@ -1,14 +1,13 @@
 import Carousel from "./ui-client/carousel";
-import { findAll } from "./actions/database-get";
+import { findAll } from "./actions/get-actions";
 import ProductsListByCategory from "./ui-client/products-list-by-category";
 
 export default async function Home() {
-  const products = await findAll(1, 10);  
+  const productsResponse = await findAll(1, 10);  
   return (
     <>
       <Carousel />
-      <ProductsListByCategory inititalProducts={products} hasMore={true} />
-      
+      <ProductsListByCategory inititalProducts={productsResponse} hasMore={true} />   
     </>
   );
 }

@@ -1,7 +1,9 @@
 "use client"
 
 import { CART_KEY } from "../configuration/wwurm";
-import { ICallback, ICart, ICartItem, IStore  } from "../ts/type-definitions";
+import { ICartItem } from "../domain/cart";
+import { ICallback, IStore } from "./cart-interface";
+
 
 /* Localstorage is used for state management as state is not preserved from server
  side render of Nextjs */
@@ -11,7 +13,7 @@ import { ICallback, ICart, ICartItem, IStore  } from "../ts/type-definitions";
 let instance: Store;
 
 class Store implements IStore {
-    cart: ICart = [];
+    cart: Array<ICartItem> = [];
 
     /* Maintain a list of callback functions to update the ui when the cart is changed */
     callbacks: Array<ICallback> = [];

@@ -3,10 +3,9 @@ import Dropdown from '../ui-client/dropdown';
 import { NAV, LOGO } from '../configuration/wwurm';
 import SideCart from '../ui-client/cart-aside';
 import BtnCart from '../ui-client/btn-cart';
-import { getCategories } from '../actions/database-get';
+import { getCategories } from '../actions/get-actions';
 
 export default async function Header() {
-
   const categories = await getCategories();
   return (
     <>

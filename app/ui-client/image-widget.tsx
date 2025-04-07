@@ -3,14 +3,12 @@
 import { useState } from "react";
 import { IMAGE_PREFIX } from "../configuration/s3-configuration";
 
-export default function ImageWidget({ largeImage, smallImage }: {
-    largeImage?:string;
-    smallImage?: string;
+export default function ImageWidget({ images, thumbs }: {
+    images: Array<string>;
+    thumbs: Array<string>;
 }) {
     const [selected, setSelected] = useState(0);
     const handleSelect = (index: number) => setSelected(index);
-    const thumbs = smallImage!.split(',');
-    const images = largeImage!.split(',');
     return (
     <div className="product-images">
         <ul className="thumbnail-list" role="list">

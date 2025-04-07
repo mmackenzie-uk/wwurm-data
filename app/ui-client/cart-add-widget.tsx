@@ -1,18 +1,19 @@
 "use client"
 
 import {  store } from "@/app/cart-store/cart";
-import { ITruncatedProduct, IProduct, ICartItem } from "../ts/type-definitions"
-
 import { useState } from "react";
 import { openCart } from "../ts/ui";
 import InputNumber from "./input-number";
-import { toCartItem } from "../domain";
 
-export default function CartAdd({ product } : { product : IProduct}) {
+import { IProductResponse } from "../conversion/product-convert";
+import { toCartItem } from "../conversion/cart-item-convert";
+
+export default function CartAdd({ productResponse } : { productResponse : IProductResponse}) {
     const [count, setCount ] = useState(1);
 
     const addItem = () => {
-        let cartItem = toCartItem(product);
+        let cartItem = toCartItem(productResponse);
+        if (!cartItem) return
         cartItem.qty = count;
         store.add(cartItem);
         openCart();

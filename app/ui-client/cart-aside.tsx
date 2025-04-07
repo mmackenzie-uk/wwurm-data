@@ -41,7 +41,7 @@ export default function CartAside() {
                     <ul className="cart-aside-items" role="list">
                     {
                         cart.map(({id, name, price, smallImage, slug, qty}) => {                      
-                            const src = IMAGE_PREFIX + encodeURIComponent(smallImage!.split(',')[0]); 
+                            const src = IMAGE_PREFIX + encodeURIComponent(smallImage as string); 
                             return ( 
                                 <li key={id} className="cart-aside-item">
                                     <div className="row">

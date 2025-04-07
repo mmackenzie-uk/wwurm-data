@@ -1,15 +1,16 @@
 "use client"
 
 import { store } from "@/app/cart-store/cart";
-import { IProduct } from "../ts/type-definitions";
 import { openCart } from "../ts/ui";
-import { toCartItem } from "../domain";
+import { IProductResponse } from "../conversion/product-convert";
+import { toCartItem } from "../conversion/cart-item-convert";
 
-export default function BtnBuy({ product } : {
-    product: IProduct
+export default function BtnBuy({ productResponse } : {
+    productResponse: IProductResponse
 }) {
 
-    const cartItem = toCartItem(product);
+    const cartItem = toCartItem(productResponse);
+    if (!cartItem) return;
     const addItem = () => {
         store.add(cartItem);
         openCart();
@@ -17,7 +18,7 @@ export default function BtnBuy({ product } : {
 
     return (
         <button className="btn-buy" onClick={addItem}>
-            <span>$ {product.price.toFixed(2)}</span>
+            <span>$ {productResponse.price.toFixed(2)}</span>
         </button>
     );
 }

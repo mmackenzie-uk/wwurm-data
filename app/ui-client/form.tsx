@@ -1,15 +1,16 @@
 "use client"
 
-import { handleProduct } from "@/app/actions/database-edit";
+import { handleProduct, IFormState } from "@/app/actions/form-actions";
 import { ALBUM_PHOTO_KEY, HREF } from "@/app/configuration/s3-configuration";
-import { ICategory, IFormParams, IFormState } from "../ts/type-definitions";
 import Link from "next/link";
 import { _Object } from "@aws-sdk/client-s3";
 import { useActionState } from "react";
+import { ICategoryResponse } from "../conversion/category-convert";
+import { IFormParams } from "../conversion/form-data-convert";
 
-export default function Form({ formParams, edit, photos, categories }: {
+export default function Form({ formParams, edit, photos, categoriesResponse }: {
     formParams: IFormParams, 
-    categories: Array<ICategory>,
+    categoriesResponse: Array<ICategoryResponse>,
     photos: _Object[],
     edit: boolean
 }) {
@@ -132,7 +133,7 @@ export default function Form({ formParams, edit, photos, categories }: {
                         <label htmlFor="price" className="edit-form-label">Category:</label>
                         <ul className="edit-form-categories" role="list">
                             {
-                                categories.map(({ name, id, slug }, index) => 
+                                categoriesResponse.map(({ name, id, slug }, index) => 
                                     <li key={id} className="edit-form-category">
                                         <input 
                                             type="radio" 
