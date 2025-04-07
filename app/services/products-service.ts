@@ -1,37 +1,48 @@
 import { openDb } from "../data/db";
 import { IProduct } from "../domain/product";
 
-const ProductsService = {
-    get: async function (currentPage = 1, ITEMS_PER_PAGE = 5) {
+/* Singleton  */
+let instance: ProductsService;
+
+class ProductsService {
+    constructor() {
+        /* instantiate as a singleton */
+        if (instance) {
+            throw new Error("You can only create one instance!");
+        }
+        instance = this;
+    }
+
+    async get(currentPage = 1, ITEMS_PER_PAGE = 5) {
             const OFFSET = (currentPage - 1) * ITEMS_PER_PAGE;
             const db = await openDb();
             const sql = `SELECT * FROM products ORDER BY id DESC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`;
             const products = await db.all(sql);
             return products as Array<IProduct>;
-        },
-    getByCategory: async function (categoryId: number, currentPage = 1, ITEMS_PER_PAGE = 5) {
+        }
+    async getByCategory(categoryId: number, currentPage = 1, ITEMS_PER_PAGE = 5) {
             const OFFSET = (currentPage - 1) * ITEMS_PER_PAGE;
             const db = await openDb();
             const sql = `SELECT * FROM products WHERE categoryId = ${categoryId} 
                 ORDER BY id DESC LIMIT ${ITEMS_PER_PAGE} OFFSET ${OFFSET}`
             const products = await db.all(sql);
             return products as Array<IProduct>;
-        },
-    getProductBySlug: async function (slug: string) {
+        }
+    async getProductBySlug(slug: string) {
             const db = await openDb();
             const sql = `SELECT * FROM products WHERE slug = "${slug}"`;
             const res = await db.all(sql);
             return res[0] as IProduct;
-        },
-    findName: async function (name: string) {
+        }
+    async findName(name: string) {
             const sql = `SELECT DISTINCT name
                         FROM products
                         WHERE UPPER(name) LIKE UPPER('%${name}%')`;
             const db = await openDb();
             const res = await db.all(sql);
             return res;
-        },
-    getSimilar: async function (categoryId: number, id?: number) {
+        }
+    async getSimilar(categoryId: number, id?: number) {
             const db = await openDb();
             const sql = `SELECT * FROM products WHERE categoryId = ${categoryId} AND NOT id = "${id}"`;
             const products = await db.all(sql);
@@ -41,15 +52,15 @@ const ProductsService = {
                 arr .push(products[i]);
             }
             return arr as Array<IProduct>;
-        },
-    count: async function (ITEMS_PER_PAGE: number) {
+        }
+    async count(ITEMS_PER_PAGE: number) {
             const db = await openDb();
             const sql = `SELECT COUNT(*) FROM products`;
             const res = await db.all(sql);
             const totalPages = Math.ceil(Number( res[0]['COUNT(*)']) / ITEMS_PER_PAGE);
             return totalPages;
-        },
-    update: async function (product: IProduct) {
+        }
+    async update(product: IProduct) {
         const db = await openDb();
         const sql =` UPDATE products
             SET price = ${product.price},
@@ -64,8 +75,8 @@ const ProductsService = {
             WHERE id = ${product.id}`;
         const res = await db.all(sql);
         return res;
-    },
-    create: async function(product: IProduct) {
+    }
+    async create(product: IProduct) {
 
         const db = await openDb();
 
@@ -86,8 +97,8 @@ const ProductsService = {
         ];
         const res = await db.run(sql, ...params);
         return res;
-    },
-    delete: async function (id: number) {
+    }
+    async delete(id: number) {
         const db = await openDb();
         const sql = `DELETE FROM products WHERE id=${id}`;
         const res = await db.all(sql);
@@ -95,6 +106,9 @@ const ProductsService = {
     }
 }
 
-export default ProductsService;
+const productsService = new ProductsService();
+
+export { productsService } ;
+
 
 

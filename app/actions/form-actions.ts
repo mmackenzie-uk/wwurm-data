@@ -32,7 +32,7 @@ export async function handleProduct(prevState: IFormState, formParams: FormData)
         const res = await ProductsService.findName(product.name);
         if (res.length) {
             return {
-                errors: { name: [ 'existing name'] },        
+                errors: { name: ['existing name'] },        
                 message: 'Failed to Edit Product.',
             };
         }  
