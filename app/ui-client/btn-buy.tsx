@@ -1,9 +1,8 @@
 "use client"
-
-import { store } from "@/app/cart-store/cart";
 import { openCart } from "../ts/ui";
 import { IProductResponse } from "../conversion/product-convert";
 import { toCartItem } from "../conversion/cart-item-convert";
+import { store } from "../services/cart-service";
 
 export default function BtnBuy({ productResponse } : {
     productResponse: IProductResponse

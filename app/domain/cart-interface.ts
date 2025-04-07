@@ -1,4 +1,4 @@
-import { ICartItem } from "../domain/cart";
+import { ICartItem } from "./cart";
 
 export type ICallback = () => void;
 

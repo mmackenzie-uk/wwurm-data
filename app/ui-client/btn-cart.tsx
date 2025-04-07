@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { store } from "@/app/cart-store/cart";
 import { openCart } from "../ts/ui";
+import { store } from "../services/cart-service";
 
 export default function BtnCart() {
     const [count, setCount] = useState(0);

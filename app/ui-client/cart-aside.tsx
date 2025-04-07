@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { store } from "@/app/cart-store/cart";
-import { ICart } from "../ts/type-definitions";
 import InputNumber from "./input-number";
 import { closeCart } from "../ts/ui";
 import { IMAGE_PREFIX } from "../configuration/s3-configuration";
+import { store } from "../services/cart-service";
+import { ICartItem } from "../domain/cart";
 
 export default function CartAside() {
-    const [cart, setCart] = useState<ICart>([]);
+    const [cart, setCart] = useState<Array<ICartItem>>([]);
 
     useEffect(() => {
         setCart(store.getCart());

@@ -2,7 +2,7 @@
 
 import { CART_KEY } from "../configuration/wwurm";
 import { ICartItem } from "../domain/cart";
-import { ICallback, IStore } from "./cart-interface";
+import { ICallback, IStore } from "../domain/cart-interface";
 
 
 /* Localstorage is used for state management as state is not preserved from server

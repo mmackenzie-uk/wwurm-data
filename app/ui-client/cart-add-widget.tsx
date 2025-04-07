@@ -1,12 +1,11 @@
 "use client"
-
-import {  store } from "@/app/cart-store/cart";
 import { useState } from "react";
 import { openCart } from "../ts/ui";
 import InputNumber from "./input-number";
 
 import { IProductResponse } from "../conversion/product-convert";
 import { toCartItem } from "../conversion/cart-item-convert";
+import { store } from "../services/cart-service";
 
 export default function CartAdd({ productResponse } : { productResponse : IProductResponse}) {
     const [count, setCount ] = useState(1);
