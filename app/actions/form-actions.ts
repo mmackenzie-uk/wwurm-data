@@ -2,10 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from 'zod';
-import ProductsService from "../services/products-service";
 import { fromFormParams, toFormParams } from "../conversion/form-data-convert";
 import { IFormState, ValidateProduct } from "../validation/validate";
+import { productsService } from "../services/products-service";
 
 
 export async function handleProduct(prevState: IFormState, formParams: FormData) {
@@ -26,26 +25,25 @@ export async function handleProduct(prevState: IFormState, formParams: FormData)
     }
     
     if (product.id) {
-       await ProductsService.update(product);
+       await productsService.update(product);
     } else {
        // check for existing product
-        const res = await ProductsService.findName(product.name);
+        const res = await productsService.findName(product.name);
         if (res.length) {
             return {
                 errors: { name: ['existing name'] },        
                 message: 'Failed to Edit Product.',
             };
         }  
-        await ProductsService.create(product);
+        await productsService.create(product);
     } 
 
     revalidatePath('/admin');
     redirect('/admin');
 }
 
-
 export async function getFormParams(slug: string) {
-    const product = await ProductsService.getProductBySlug(slug);
+    const product = await productsService.getProductBySlug(slug);
     const formParams = toFormParams(product);
     return formParams;
 }
