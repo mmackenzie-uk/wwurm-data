@@ -1,17 +1,5 @@
 import { IProduct } from "../domain/product";
-
-export type IProductResponse = {
-  id?: number;
-  name: string;
-  price: number; 
-  description: string;
-  smallImage: Array<string>; 
-  mediumImage: Array<string>;
-  largeImage: Array<string>; 
-  availability: number; 
-  slug: string;
-  categoryId: number;
-}
+import { IProductDTO } from "../DTO/productDTO";
 
 export const fromProductDomain = ({
   id,  
@@ -24,7 +12,7 @@ export const fromProductDomain = ({
   availability,
   slug,
   categoryId} : IProduct) => {
-  const productResponse: IProductResponse = {
+  const productDTO: IProductDTO = {
     id,
     name,
     price: price / 100,
@@ -36,11 +24,11 @@ export const fromProductDomain = ({
     slug,
     categoryId
   }
-  return  productResponse;
+  return  productDTO;
 }
 
 export const fromProductsDomain = (products: Array<IProduct>) => {
-  const arr: Array<IProductResponse> = [];
+  const arr: Array<IProductDTO> = [];
   products.forEach((product) => {
       const response = fromProductDomain(product)
       arr.push(response);

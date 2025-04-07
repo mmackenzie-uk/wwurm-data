@@ -9,14 +9,14 @@ import ImageWidget from "@/app/ui-client/image-widget";
 
 export default async function Product({ params, }: {params: Promise<{ slug: string }>}) {
     const { slug } = await params;
-    const { productResponse, productsResponse, categoryResponse} = await getProductPageData(slug);
+    const { productDTO, productsDTO, categoryDTO} = await getProductPageData(slug);
 
     type IBreadCrumb = { name: string; url: string; }
 
     const breadCrumbs: Array<IBreadCrumb> = [
         { name: "Shop", url: "/"},
-        { name: categoryResponse.slug, url: `/${categoryResponse.slug}`}, 
-        { name: productResponse.name, url: productResponse.name}
+        { name: categoryDTO.slug, url: `/${categoryDTO.slug}`}, 
+        { name: productDTO.name, url: productDTO.name}
     ]
     const len = breadCrumbs.length;
 
@@ -50,15 +50,15 @@ export default async function Product({ params, }: {params: Promise<{ slug: stri
                 </section>
                 <section className="section">
                     <div className="product-grid">
-                        <ImageWidget thumbs={productResponse.smallImage} images={productResponse.largeImage} />
+                        <ImageWidget thumbs={productDTO.smallImage} images={productDTO.largeImage} />
                         <div className="product-details">
-                            <h2 className="product-name">{productResponse.name}</h2>
-                            <p className="product-price">$ {productResponse.price.toFixed(2)}</p>
-                            <p className="product-description">{productResponse.description}</p>
+                            <h2 className="product-name">{productDTO.name}</h2>
+                            <p className="product-price">$ {productDTO.price.toFixed(2)}</p>
+                            <p className="product-description">{productDTO.description}</p>
                             <div className="product-availability">
-                                {(productResponse.availability > 0) ? "In Stock" : "Out of Stock"}
+                                {(productDTO.availability > 0) ? "In Stock" : "Out of Stock"}
                             </div>
-                            <CartAddWidget productResponse={productResponse}/>
+                            <CartAddWidget productDTO={productDTO}/>
                             <ul className="product-icon" role="list">     
                             {
                                 ICON_LIST.map(({ icon }, idx) => <li key={idx}><a href="" ><i className={icon}></i></a></li>)
@@ -72,11 +72,11 @@ export default async function Product({ params, }: {params: Promise<{ slug: stri
                
             <div className="similar-products">
                 <section className="section">
-                    { productsResponse && <h2 className="title-similar-products">Similar Products</h2> }
+                    { productDTO && <h2 className="title-similar-products">Similar Products</h2> }
                     <div className="grid-products-similar">
                     {
-                        productsResponse && productsResponse.map((productResponse, index) => 
-                                    <Card productResponse={productResponse} key={index} />)
+                        productsDTO && productsDTO.map((productDTO, index) => 
+                                    <Card productDTO={productDTO} key={index} />)
                     }
                     </div>
                 </section>

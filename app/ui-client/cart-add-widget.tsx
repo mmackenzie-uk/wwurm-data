@@ -3,15 +3,15 @@ import { useState } from "react";
 import { openCart } from "../ts/ui";
 import InputNumber from "./input-number";
 
-import { IProductResponse } from "../conversion/product-convert";
-import { toCartItem } from "../conversion/cart-item-convert";
+import { toCartItem } from "../DTO-mappings/cart-item-mappings";
 import { store } from "../services/cart-service";
+import { IProductDTO } from "../DTO/productDTO";
 
-export default function CartAdd({ productResponse } : { productResponse : IProductResponse}) {
+export default function CartAdd({ productDTO } : { productDTO : IProductDTO}) {
     const [count, setCount ] = useState(1);
 
     const addItem = () => {
-        let cartItem = toCartItem(productResponse);
+        let cartItem = toCartItem(productDTO);
         if (!cartItem) return
         cartItem.qty = count;
         store.add(cartItem);

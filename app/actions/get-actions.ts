@@ -2,40 +2,40 @@
 
 import { openDb } from "../data/db";
 
-import { fromCategoriesDomain, fromCategoryDomain } from "../conversion/category-convert";
+import { fromCategoriesDomain, fromCategoryDomain } from "../DTO-mappings/category-mappings";
 
-import { fromProductDomain, fromProductsDomain } from "../conversion/product-convert";
+import { fromProductDomain, fromProductsDomain } from "../DTO-mappings/product-mappings";
 import { categoriesService } from "../services/categories-service";
 import { productsService } from "../services/products-service";
 
 export async function getCategories() {
     const categories = await categoriesService.get();
-    const categoriesResponse = fromCategoriesDomain(categories)
-    return categoriesResponse;
+    const categoriesDTO = fromCategoriesDomain(categories)
+    return categoriesDTO;
 }
 
 export async function findAll(currentPage: number, ITEMS_PER_PAGE: number) {
     const products = await productsService.get(currentPage, ITEMS_PER_PAGE);
-    const productsResponse = fromProductsDomain(products);
-    return productsResponse;
+    const productDTO = fromProductsDomain(products);
+    return productDTO;
 }
 
 export async function findByCategory(categoryId: number, currentPage: number, ITEMS_PER_PAGE: number) {
    const products = await productsService.getByCategory(categoryId, currentPage, ITEMS_PER_PAGE)
-   const productsResponse = fromProductsDomain(products);
-   return productsResponse;
+   const productDTO = fromProductsDomain(products);
+   return productDTO;
 }
 
 export async function getProduct(slug: string) {
     const product = await productsService.getProductBySlug(slug);
-    const productResponse = fromProductDomain(product);
-    return productResponse;
+    const productDTO = fromProductDomain(product);
+    return productDTO;
 }
 
 export async function getCategory(slug: string) {
    const category = await categoriesService.getBySlug(slug);
-   const categoryResponse = fromCategoryDomain(category);
-   return categoryResponse;
+   const categoryDTO= fromCategoryDomain(category);
+   return categoryDTO;
 }
 
 export async function getCategoryById(id: number) {
@@ -46,8 +46,8 @@ export async function getCategoryById(id: number) {
 
 export async function getSimilar(categoryId: number, id: number) {
     const products = await productsService.getSimilar(categoryId, id);
-    const productsResponse = fromProductsDomain(products);
-    return productsResponse;
+    const productDTO = fromProductsDomain(products);
+    return productDTO;
 }
 
 export async function getProductPageData(slug : string) {
@@ -56,9 +56,9 @@ export async function getProductPageData(slug : string) {
     const products = await productsService.getSimilar(category.id, product.id);
 
     return { 
-        productResponse: fromProductDomain(product),
-        productsResponse: fromProductsDomain(products),
-        categoryResponse: fromCategoryDomain(category)
+        productDTO: fromProductDomain(product),
+        productsDTO: fromProductsDomain(products),
+        categoryDTO: fromCategoryDomain(category)
     }
 }
 

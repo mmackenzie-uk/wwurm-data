@@ -2,10 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { fromFormParams, toFormParams } from "../conversion/form-data-convert";
+import { fromFormParams, toFormParams } from "../DTO-mappings/form-data-mappings";
 import { IFormState, ValidateProduct } from "../validation/validate";
 import { productsService } from "../services/products-service";
-
 
 export async function handleProduct(prevState: IFormState, formParams: FormData) {
 

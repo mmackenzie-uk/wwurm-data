@@ -1,14 +1,14 @@
 "use client"
 import { openCart } from "../ts/ui";
-import { IProductResponse } from "../conversion/product-convert";
-import { toCartItem } from "../conversion/cart-item-convert";
+import { IProductDTO } from "../DTO-mappings/product-mappings";
+import { toCartItem } from "../DTO-mappings/cart-item-mappings";
 import { store } from "../services/cart-service";
 
-export default function BtnBuy({ productResponse } : {
-    productResponse: IProductResponse
+export default function BtnBuy({ productDTO } : {
+    productDTO: IProductDTO
 }) {
 
-    const cartItem = toCartItem(productResponse);
+    const cartItem = toCartItem(productDTO);
     if (!cartItem) return;
     const addItem = () => {
         store.add(cartItem);
@@ -17,7 +17,7 @@ export default function BtnBuy({ productResponse } : {
 
     return (
         <button className="btn-buy" onClick={addItem}>
-            <span>$ {productResponse.price.toFixed(2)}</span>
+            <span>$ {productDTO.price.toFixed(2)}</span>
         </button>
     );
 }

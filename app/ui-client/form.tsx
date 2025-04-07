@@ -1,16 +1,18 @@
 "use client"
 
-import { handleProduct, IFormState } from "@/app/actions/form-actions";
+import { handleProduct } from "@/app/actions/form-actions";
 import { ALBUM_PHOTO_KEY, HREF } from "@/app/configuration/s3-configuration";
 import Link from "next/link";
 import { _Object } from "@aws-sdk/client-s3";
 import { useActionState } from "react";
-import { ICategoryResponse } from "../conversion/category-convert";
-import { IFormParams } from "../conversion/form-data-convert";
 
-export default function Form({ formParams, edit, photos, categoriesResponse }: {
-    formParams: IFormParams, 
-    categoriesResponse: Array<ICategoryResponse>,
+import { IFormState } from "../validation/validate";
+import { ICategoryDTO } from "../DTO/categoryDTO";
+import { IFormDTO } from "../DTO/formDTO";
+
+export default function Form({ formDTO, edit, photos, categoriesResponse }: {
+    formDTO: IFormDTO, 
+    categoriesResponse: Array<ICategoryDTO>,
     photos: _Object[],
     edit: boolean
 }) {
@@ -23,7 +25,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
             <input 
                 type="text" 
                 name="id" 
-                defaultValue={formParams?.id || ""} 
+                defaultValue={formDTO?.id || ""} 
                 hidden
             />
             <section className="section">
@@ -77,7 +79,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
                                                         id={photoKey} 
                                                         value={name} 
                                                         name={"image"} 
-                                                        defaultChecked={formParams.smallImage!.includes(name)}
+                                                        defaultChecked={formDTO.smallImage!.includes(name)}
                                                     />
                                                     <img 
                                                         src={photoUrl} 
@@ -99,7 +101,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
                             type="text" 
                             id="edit-form-name" 
                             name="name" 
-                            defaultValue={formParams.name} 
+                            defaultValue={formDTO.name} 
                             className="edit-form-name"
                         />
                         <label htmlFor="price" className="edit-form-label">Price:</label><br/>
@@ -108,7 +110,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
                                 className="edit-form-price"
                                 type="number" 
                                 id="price" 
-                                defaultValue={formParams.price.toFixed(2)} 
+                                defaultValue={formDTO.price.toFixed(2)} 
                                 name="price" 
                                 min="1" 
                                 step=".1"
@@ -120,7 +122,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
                             name="availability"
                             type="number" 
                             className="edit-form-availability" 
-                            defaultValue={formParams.availability}
+                            defaultValue={formDTO.availability}
                         /> 
                         <br/>
                         <label htmlFor="description" className="edit-form-label">Description:</label>
@@ -128,7 +130,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
                             id="description" 
                             name="description" 
                             className="edit-form-description"
-                            defaultValue={formParams.description}
+                            defaultValue={formDTO.description}
                         />
                         <label htmlFor="price" className="edit-form-label">Category:</label>
                         <ul className="edit-form-categories" role="list">
@@ -140,7 +142,7 @@ export default function Form({ formParams, edit, photos, categoriesResponse }: {
                                             id={slug} 
                                             name="categoryId" 
                                             value={id} 
-                                            defaultChecked={id === formParams.categoryId}
+                                            defaultChecked={id === formDTO.categoryId}
                                         />
                                         <label className="edit-form-category-label" htmlFor={slug}>{name}</label><br />
                                     </li>)

@@ -2,13 +2,13 @@ import Link from "next/link";
 import BtnBuy from "../ui-client/btn-buy";
 import { BtnLike } from "./btns";
 import { IMAGE_PREFIX } from "../configuration/s3-configuration";
-import { IProductResponse } from "../conversion/product-convert";
+import { IProductDTO } from "../DTO/productDTO";
 
-export default function Card({ productResponse, index }: {
-    productResponse: IProductResponse;
+export default function Card({ productDTO, index }: {
+    productDTO: IProductDTO;
     index?: string | number | undefined;
 }) {
-    const { name, mediumImage, slug } = productResponse;
+    const { name, mediumImage, slug } = productDTO;
     const src = IMAGE_PREFIX + encodeURIComponent(mediumImage[0]); 
     return (
         <div key={index} className="card">                   
@@ -18,7 +18,7 @@ export default function Card({ productResponse, index }: {
             <div className="card-caption">
                 <ul className="card-detail-list">
                     <li key="card-link"><Link href="" className="card-link">{name}</Link></li>
-                    <li key="btn-buy"><BtnBuy productResponse={productResponse}/></li>                                    
+                    <li key="btn-buy"><BtnBuy productDTO={productDTO}/></li>                                    
                 </ul>
                 <div className="card-like">
                     <BtnLike />

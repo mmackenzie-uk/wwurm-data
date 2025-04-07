@@ -1,18 +1,10 @@
 
 import { ICategory } from "../domain/category";
+import { ICategoryDTO } from "../DTO/categoryDTO";
 
-export interface ICategoryRequest {
-  name: string;
-  slug: string;
-}
 
-export interface ICategoryResponse {
-  id?: number;
-  name: string;
-  slug: string;
-}
 
-export const toCategoryDomain = ({ name, slug} : ICategoryRequest) => {
+export const toCategoryDomain = ({ name, slug} : ICategoryDTO) => {
   const category: ICategory = {
     name,
     slug
@@ -21,16 +13,16 @@ export const toCategoryDomain = ({ name, slug} : ICategoryRequest) => {
 }
 
 export const fromCategoryDomain = ({id, name, slug} : ICategory) => {
-  const categoryResponse: ICategoryResponse = {
+  const categoryDTO: ICategoryDTO = {
     id,
     name,
     slug
   }
-  return  categoryResponse;
+  return  categoryDTO;
 }
 
 export const fromCategoriesDomain = (categories: Array<ICategory>) => {
-  const arr: Array<ICategoryResponse> = [];
+  const arr: Array<ICategoryDTO> = [];
   categories.forEach((category) => {
       const response = fromCategoryDomain(category)
       arr.push(response);

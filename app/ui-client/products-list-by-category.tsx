@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { findAll, findByCategory } from "../actions/get-actions";
 import Card from "../ui/card";
-import { IProductResponse } from "../conversion/product-convert";
+import { IProductDTO } from "../DTO/productDTO";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -11,19 +11,19 @@ export default function ProductsList({
     categoryId,
     hasMore
 }: { 
-    inititalProducts: Array<IProductResponse>,
+    inititalProducts: Array<IProductDTO>,
     categoryId?: number,
     hasMore: boolean
 }) {
 
   const [page, setPage] = useState(2);
-  const [productsResponse, setProductsResponse] = useState<IProductResponse[]>(inititalProducts);
+  const [productsDTO, setProductsDTO] = useState<IProductDTO[]>(inititalProducts);
   const [hasMoreData, setHasMoreData] = useState(hasMore);
 
   const loadMore = async () => {
     if (hasMoreData) {
 
-      let apiPosts: string | any[] | ConcatArray<IProductResponse>;
+      let apiPosts: string | any[] | ConcatArray<IProductDTO>;
       if (categoryId) {
         apiPosts = await findByCategory(categoryId, page, ITEMS_PER_PAGE);
       } else {
@@ -33,7 +33,7 @@ export default function ProductsList({
       if (!apiPosts.length) {
         setHasMoreData(false);
       }
-      setProductsResponse((prevPosts) => prevPosts.concat(apiPosts));
+      setProductsDTO((prevPosts) => prevPosts.concat(apiPosts));
       setPage((page) => page + 1);
     }
   };
@@ -42,8 +42,8 @@ export default function ProductsList({
     <>
         <section className="section">
             <div className="grid-products">
-            {productsResponse.map((productResponse, index) => 
-                <Card productResponse={productResponse} key={index} />)
+            {productsDTO.map((productDTO, index) => 
+                <Card productDTO={productDTO} key={index} />)
             }
             </div>
         </section>

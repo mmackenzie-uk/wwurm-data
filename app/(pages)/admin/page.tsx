@@ -17,7 +17,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
     const currentPage = Number(searchParams?.page) || 1;
     const count = await getCount(ITEMS_PER_PAGE);  
     
-    const productsResponse = await findAll(currentPage, ITEMS_PER_PAGE);
+    const productsDTO = await findAll(currentPage, ITEMS_PER_PAGE);
 
     return (
         <div className="admin">
@@ -47,7 +47,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                     <span>Qty</span>
                 </li>
             {
-                productsResponse.map(({ name, id, price, availability, slug, smallImage }) => {
+                productsDTO.map(({ name, id, price, availability, slug, smallImage }) => {
                     const src = IMAGE_PREFIX + encodeURIComponent(smallImage[0]); 
                     let deleteProductWithId;
                     if (id) {
