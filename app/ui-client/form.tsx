@@ -10,9 +10,9 @@ import { IFormState } from "../validation/validate";
 import { ICategoryDTO } from "../DTO/categoryDTO";
 import { IFormDTO } from "../DTO/formDTO";
 
-export default function Form({ formDTO, edit, photos, categoriesResponse }: {
+export default function Form({ formDTO, edit, photos, categoriesDTO }: {
     formDTO: IFormDTO, 
-    categoriesResponse: Array<ICategoryDTO>,
+    categoriesDTO: Array<ICategoryDTO>,
     photos: _Object[],
     edit: boolean
 }) {
@@ -135,7 +135,7 @@ export default function Form({ formDTO, edit, photos, categoriesResponse }: {
                         <label htmlFor="price" className="edit-form-label">Category:</label>
                         <ul className="edit-form-categories" role="list">
                             {
-                                categoriesResponse.map(({ name, id, slug }, index) => 
+                                categoriesDTO.map(({ name, id, slug }, index) => 
                                     <li key={id} className="edit-form-category">
                                         <input 
                                             type="radio" 

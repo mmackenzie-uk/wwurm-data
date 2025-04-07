@@ -2,8 +2,6 @@
 import { ICategory } from "../domain/category";
 import { ICategoryDTO } from "../DTO/categoryDTO";
 
-
-
 export const toCategoryDomain = ({ name, slug} : ICategoryDTO) => {
   const category: ICategory = {
     name,

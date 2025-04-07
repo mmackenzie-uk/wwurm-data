@@ -2,13 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { fromFormParams, toFormParams } from "../DTO-mappings/form-data-mappings";
 import { IFormState, ValidateProduct } from "../validation/validate";
 import { productsService } from "../services/products-service";
+import { fromFormData, toFormDTO } from "../DTO-mappings/form-data-mappings";
 
-export async function handleProduct(prevState: IFormState, formParams: FormData) {
+export async function handleProduct(prevState: IFormState, request: FormData) {
 
-    const product = fromFormParams(formParams);
+    const product = fromFormData(request);
 
     // Validate form fields using Zod
     const validatedFields = ValidateProduct.safeParse({
@@ -41,8 +41,8 @@ export async function handleProduct(prevState: IFormState, formParams: FormData)
     redirect('/admin');
 }
 
-export async function getFormParams(slug: string) {
+export async function getFormData(slug: string) {
     const product = await productsService.getProductBySlug(slug);
-    const formParams = toFormParams(product);
-    return formParams;
+    const formDTO = toFormDTO(product);
+    return formDTO;
 }
