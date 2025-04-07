@@ -57,7 +57,7 @@ export default async function Page(props: { searchParams?: Promise<{ page?: stri
                         <li key={id} className="admin-list-item">
                             <span>{id}</span>
                             <div className="admin-list-img-wrap">
-                                <img src={src} className="admin-list-img"/>
+                                <img src={src} className="admin-list-img" alt="product image" />
                             </div>
                             <span>{name}</span>
                             <span>{slug}</span>

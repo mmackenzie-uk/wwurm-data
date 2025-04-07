@@ -18,7 +18,7 @@ export default function Carousel() {
   return (
     <div className="container">  
       <div className="overlay-wrap">
-        <img className="overlay-img" src={BRAND} />
+        <img className="overlay-img" src={BRAND} alt="brand" />
       </div>  
       <ul className="marker-dots"> 
         {
@@ -32,7 +32,7 @@ export default function Carousel() {
         {
           CAROUSEL_IMG_ARR.map((src, idx) => {
             const state = (idx === count) ? "image active" : "image inactive";
-            return <img key={idx} className={state} src={src} />;
+            return <img key={idx} className={state} src={src} alt="carousel image" />;
           })
         }
       </div> 

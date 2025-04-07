@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import Dropdown from '../ui-client/dropdown';
 import { NAV, LOGO } from '../configuration/wwurm';
 import SideCart from '../ui-client/cart-aside';

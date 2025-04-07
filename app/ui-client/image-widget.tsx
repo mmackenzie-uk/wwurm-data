@@ -17,7 +17,12 @@ export default function ImageWidget({ images, thumbs }: {
                 const src = IMAGE_PREFIX + encodeURIComponent(thumb); 
                 return ( 
                 <li key={index} className={`thumbnail ${(index === selected) ? "thumbnail-selected" : ""}`} >
-                    <img src={src} onClick={() => handleSelect(index)} className="thumbnail-img"/>
+                    <img 
+                        src={src} 
+                        onClick={() => handleSelect(index)} 
+                        className="thumbnail-img"
+                        alt="thumbnail image"
+                    />
                 </li>)
             })    
         } 
@@ -31,6 +36,7 @@ export default function ImageWidget({ images, thumbs }: {
                     <img 
                         className = {`product-image ${(index === selected) ? "selected" : ""}`} 
                         src={src} 
+                        alt="large image"
                     />
                 </li>)
             })           

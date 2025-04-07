@@ -1,14 +1,14 @@
-import { IProduct } from '../ts/type-definitions';
+import { IProductDTO } from '../DTO/productDTO';
 import Card from './card';
 
 export default function Products({ products } : {
-    products: Array<IProduct>;
+    products: Array<IProductDTO>;
 }) {
     return (
         <section className="section">
             <div className="grid-products">
                 {products.map((product, index) => 
-                    <Card product={product} key={index} />)
+                    <Card productDTO={product} key={index} />)
                 }
             </div>
         </section>

@@ -1,19 +1,19 @@
 import Link from "next/link";
+
 import BtnBuy from "../ui-client/btn-buy";
 import { BtnLike } from "./btns";
 import { IMAGE_PREFIX } from "../configuration/s3-configuration";
 import { IProductDTO } from "../DTO/productDTO";
 
-export default function Card({ productDTO, index }: {
+export default function Card({ productDTO }: {
     productDTO: IProductDTO;
-    index?: string | number | undefined;
 }) {
     const { name, mediumImage, slug } = productDTO;
     const src = IMAGE_PREFIX + encodeURIComponent(mediumImage[0]); 
     return (
-        <div key={index} className="card">                   
+        <div className="card">                   
             <Link href={`/product/${slug}`} className="card-img-wrap">
-                <img className="card-img" src={src} />
+                <img className="card-img" src={src} alt="card image" />
             </Link>            
             <div className="card-caption">
                 <ul className="card-detail-list">

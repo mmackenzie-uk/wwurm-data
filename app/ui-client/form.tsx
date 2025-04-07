@@ -3,6 +3,7 @@
 import { handleProduct } from "@/app/actions/form-actions";
 import { ALBUM_PHOTO_KEY, HREF } from "@/app/configuration/s3-configuration";
 import Link from "next/link";
+
 import { _Object } from "@aws-sdk/client-s3";
 import { useActionState } from "react";
 
@@ -84,6 +85,7 @@ export default function Form({ formDTO, edit, photos, categoriesDTO }: {
                                                     <img 
                                                         src={photoUrl} 
                                                         className="bucket-image-widget-img"
+                                                        alt="form image"
                                                     />
                                                 </label>
                                             </div>
@@ -135,7 +137,7 @@ export default function Form({ formDTO, edit, photos, categoriesDTO }: {
                         <label htmlFor="price" className="edit-form-label">Category:</label>
                         <ul className="edit-form-categories" role="list">
                             {
-                                categoriesDTO.map(({ name, id, slug }, index) => 
+                                categoriesDTO.map(({ name, id, slug }) => 
                                     <li key={id} className="edit-form-category">
                                         <input 
                                             type="radio" 

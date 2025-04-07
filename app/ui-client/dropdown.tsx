@@ -2,18 +2,22 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { ICategory } from "../configuration/wwurm";
+import { ICategoryDTO } from "../DTO/categoryDTO";
 
 
 export default function Dropdown({ list, name } : {
-    list: Array<ICategory>;
+    list: Array<ICategoryDTO>;
     name: string;
 }) {
     const [state, setState] = useState("");
     const router = useRouter();
 
     const handleClick = () => {
-        (state === "show") ? setState("dropdown-content") : setState("show");
+        if (state === "show") {
+            setState("dropdown-content");
+        } else {
+            setState("show");
+        } 
     }
     const handleNavigation = (url: string) => {
         setState("");

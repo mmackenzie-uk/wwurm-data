@@ -23,7 +23,7 @@ export default function ProductsList({
   const loadMore = async () => {
     if (hasMoreData) {
 
-      let apiPosts: string | any[] | ConcatArray<IProductDTO>;
+      let apiPosts: ConcatArray<IProductDTO>;
       if (categoryId) {
         apiPosts = await findByCategory(categoryId, page, ITEMS_PER_PAGE);
       } else {

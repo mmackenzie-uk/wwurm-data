@@ -20,7 +20,7 @@ export default function Contact() {
             <section className="section">
                 <div className="contact-container">
                     <div className="image-wrap"> 
-                        <img className="image" src={CONTACT_IMG} />
+                        <img className="image" src={CONTACT_IMG} alt="contact image" />
                     </div> 
                 </div>
             </section>
@@ -40,7 +40,7 @@ export default function Contact() {
                     <h2 className="contact-caption">{MAP_CAPTION}</h2>
                     <div className="map-container">  
                         <div className="map-img-wrap"> 
-                            <img className="map-img" src={MAP_IMG} />
+                            <img className="map-img" src={MAP_IMG} alt="map image" />
                         </div> 
                     </div> 
                 </div>

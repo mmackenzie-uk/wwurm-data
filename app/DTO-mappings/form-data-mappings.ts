@@ -4,13 +4,13 @@ import { IFormDTO } from "../DTO/formDTO";
 
 const createSlug = (name: string | undefined) => {
     if (!name) return;
-    let slug = name.replaceAll(" ", "-")
+    const slug = name.replaceAll(" ", "-")
     return slug.toLowerCase();
   }
 
 export const toFormDTO = (product?: IProduct) => {
 
-  let formDTO: IFormDTO = {
+  const formDTO: IFormDTO = {
       name: "Product Name",
       description: "description",
       price: 1,

@@ -1,8 +1,8 @@
 "use client"
 import { openCart } from "../ts/ui";
-import { IProductDTO } from "../DTO-mappings/product-mappings";
 import { toCartItem } from "../DTO-mappings/cart-item-mappings";
 import { store } from "../services/cart-service";
+import { IProductDTO } from "../DTO/productDTO";
 
 export default function BtnBuy({ productDTO } : {
     productDTO: IProductDTO

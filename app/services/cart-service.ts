@@ -26,7 +26,7 @@ class Store implements IStore {
         // important: update cart from local storage when constructor called, 
         // otherwise it initialise to empty on
         // every page refresh
-        let _contents = global?.localStorage?.getItem(CART_KEY); 
+        const _contents = global?.localStorage?.getItem(CART_KEY); 
         if ( _contents ) {
             this.cart = JSON.parse(_contents);     
         }
@@ -40,7 +40,7 @@ class Store implements IStore {
     getCount = () => this.cart.length;
     
     getCart() {
-        let _contents = localStorage.getItem(CART_KEY);
+        const _contents = localStorage.getItem(CART_KEY);
         if ( _contents ) {
             this.cart = JSON.parse(_contents);     
         } else {
@@ -51,13 +51,13 @@ class Store implements IStore {
 
     async sync () {
         /* the state is the local stoprage. update with each change to cart */
-        let _cart = JSON.stringify(this.cart);
+        const _cart = JSON.stringify(this.cart);
         await localStorage.setItem(CART_KEY, _cart);
     }
 
     find (id: number) {
         //find an item in the cart by it's id
-        let match = this.cart.filter(item => ( item.id === id ));
+        const match = this.cart.filter(item => ( item.id === id ));
         if( match && match[0] )
             return match[0];
     }

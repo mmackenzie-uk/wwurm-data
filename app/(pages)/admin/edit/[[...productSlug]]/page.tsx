@@ -1,6 +1,6 @@
 
 import { getFormData } from "@/app/actions/form-actions";
-import { getCategories, getProduct } from "@/app/actions/get-actions";
+import { getCategories } from "@/app/actions/get-actions";
 import { getPhotos } from "@/app/actions/s3-bucket";
 import Form from "@/app/ui-client/form";
 import { _Object } from "@aws-sdk/client-s3";

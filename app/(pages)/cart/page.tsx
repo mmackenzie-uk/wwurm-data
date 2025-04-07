@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { store } from "@/app/cart-store/cart";
-import { ICart } from "@/app/ts/type-definitions";
+
 import InputNumber from "@/app/ui-client/input-number";
 import { IMAGE_PREFIX } from "@/app/configuration/s3-configuration";
+import { store } from "@/app/services/cart-service";
+import { ICartItem } from "@/app/domain/cart";
 
 export default function Cart() {
-    const [cart, setCart] = useState<ICart>([]);
+    const [cart, setCart] = useState<Array<ICartItem>>([]);
 
     useEffect(() => {
         setCart(store.getCart());
@@ -38,7 +39,7 @@ export default function Cart() {
                                         <div className="cart-row">
                                             <div className="cart-col-1">
                                                 <div className="cart-col-img-wrap" >
-                                                    <img src={src} className="cart-col-img" width="75"/>
+                                                    <img src={src} className="cart-col-img" width="75" alt="cart item iamge" />
                                                 </div>
                                             </div>
                                             <div className="cart-col-2">

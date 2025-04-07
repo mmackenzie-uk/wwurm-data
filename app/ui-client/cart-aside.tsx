@@ -47,7 +47,7 @@ export default function CartAside() {
                                     <div className="row">
                                         <div className="col-1">
                                             <div className="col-img-wrap" >
-                                                <img src={src} className="col-img" width="60"/>
+                                                <img src={src} className="col-img" width="60" alt="cart image" />
                                             </div>
                                         </div>
                                         <div className="col-2">

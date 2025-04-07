@@ -16,7 +16,7 @@ export default function About() {
             <section className="section">
                 <div className="about-container">
                     <div className="image-wrap"> 
-                        <img className="image" src={ABOUT_IMG} />
+                        <img className="image" src={ABOUT_IMG} alt="about-image" />
                     </div> 
                 </div>
             </section>

@@ -1,3 +1,4 @@
+
 import { 
     SHIPPING_IMG, 
     SHIPPING_TITLE, 
@@ -20,7 +21,7 @@ export default function Shipping() {
             <section className="section">
                 <div className="shipping-container">
                     <div className="image-wrap"> 
-                        <img className="image" src={SHIPPING_IMG} />
+                        <img className="image" src={SHIPPING_IMG} alt="shipping image" />
                     </div> 
                 </div>
             </section>

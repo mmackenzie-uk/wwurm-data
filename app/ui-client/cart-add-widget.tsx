@@ -11,14 +11,14 @@ export default function CartAdd({ productDTO } : { productDTO : IProductDTO}) {
     const [count, setCount ] = useState(1);
 
     const addItem = () => {
-        let cartItem = toCartItem(productDTO);
+        const cartItem = toCartItem(productDTO);
         if (!cartItem) return
         cartItem.qty = count;
         store.add(cartItem);
         openCart();
     }
 
-    const increment = () => setCount(c => count + 1);
+    const increment = () => setCount(c => c + 1);
 
     const decrement = () => {
         if (count > 1) {
