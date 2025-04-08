@@ -1,3 +1,6 @@
+# Based on docker blog for dockerizing a React app
+# https://www.docker.com/blog/how-to-dockerize-react-app/
+
 FROM node:18
 WORKDIR /app
 COPY package*.json ./
@@ -5,4 +8,4 @@ RUN npm install
 COPY . .
 EXPOSE 3000
 RUN npm run build;
-CMD npm run start;
+CMD ["npm", "start"]
